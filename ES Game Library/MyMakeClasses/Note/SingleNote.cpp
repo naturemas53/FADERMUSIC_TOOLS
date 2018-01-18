@@ -7,7 +7,7 @@ void SingleNote::NormalDraw(float drawareaheight, float drawareawidth, float not
 
 	float betweenwidth = drawareawidth - notehit_xpos;
 	DWORD betweentime = this->timing_ - nowtime;
-	float timingrate = (float)betweentime / 1000.0f;
+	float timingrate = (float)(1000 - betweentime) / 1000.0f;
 
 	float x_pos = drawareawidth - (timingrate * betweenwidth);
 	float y_pos = drawareaheight * this->height_;
@@ -19,5 +19,5 @@ void SingleNote::NormalDraw(float drawareaheight, float drawareawidth, float not
 	SPRITE sp = this->sp_;
 	Rect userect = this->USERECT_;
 
-	SpriteBatch.Draw(*sp,pos,1.0f);
+	SpriteBatch.Draw(*sp,pos,userect,1.0f);
 }

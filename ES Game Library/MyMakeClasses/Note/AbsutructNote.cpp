@@ -19,7 +19,7 @@ SIZE_(Vector2(30.0f, 30.0f)){
 void AbstructNote::SimpleDraw(float drawareaheight, float drawareawidth, float notehit_xpos, DWORD nowtime){
 
 	notehit_xpos -= 15.0f; //(ノートサイズの半分)
-	//drawareawidth += 30.0f;//30.0fはノートの大きさ
+	drawareawidth += 30.0f;//30.0fはノートの大きさ
 
 	float betweenwidth = drawareawidth - notehit_xpos;
 	DWORD betweentime = this->timing_ - nowtime;

@@ -34,3 +34,23 @@ void NoteManager::DrawtoLayer(int layerid, float layerheight, float layerwidth, 
 	}
 
 }
+
+void NoteManager::DrawtoPlayArea(int areaid, float areaheight, float areawidth, float areanotehit_x){
+
+	DWORD nowtime = this->jukebox_ptr_->GetNowTimeMiliSec();
+
+	for (auto note : this->notes_){
+
+		if (labs((long)note->GetTiming() - nowtime) < 1000){
+
+			if (note->GetPlayArea() == areaid){
+
+				note->NormalDraw(areaheight, areawidth, areanotehit_x, nowtime);
+
+			}
+
+		}
+
+	}
+
+}

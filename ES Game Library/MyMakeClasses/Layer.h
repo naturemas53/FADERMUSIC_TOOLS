@@ -9,7 +9,7 @@ public:
 	Layer(Vector3 pos,int id):
 	POS_(pos),
 	SIZE_(Vector2(480.0f,70.0f)),
-	NOTEHITPOS_(150.0f),
+	NOTEHITPOS_(180.0f),
 	PANELUSERECT_(RectWH(0,80,120,70)),
 	SPEAKERUSERECT_(RectWH(0,150,64,64)),
 	ID_(id){

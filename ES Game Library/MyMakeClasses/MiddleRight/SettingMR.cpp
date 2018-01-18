@@ -36,7 +36,7 @@ SettingMR::SettingMR(){
 	this->timingbuttons_.push_back(new PMCalcButton(Vector3(245.0f, 130.0f, 0.0f), _T("«"), Vector2(20.0f, 20.0f),-10.0f));
 	this->timingbuttons_.push_back(new PMCalcButton(Vector3(270.0f, 130.0f, 0.0f), _T("«"), Vector2(20.0f, 20.0f),-1.0f));
 
-	this->notemakebutton_ = new NoteMakeButton(Vector3(this->SCREENSIZE_.x - 192.0f, this->SCREENSIZE_.y - 40.0f,0.0f));
+	this->notemakebutton_ = new NoteMakeButton(Vector3(this->SCREENSIZE_.x - (192.0f / 2.0f), this->SCREENSIZE_.y - 40.0f,0.0f));
 }
 
 SettingMR::~SettingMR(){

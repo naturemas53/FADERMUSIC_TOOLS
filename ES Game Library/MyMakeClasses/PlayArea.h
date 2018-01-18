@@ -8,6 +8,7 @@ public:
 	PlayArea(Vector3 pos,int id):
 	POS_(pos),
 	SIZE_(Vector2(426.0f,360.0f)),
+	NOTEHITPOS_(120.0f),
 	ID_(id),
 	screen_(GraphicsDevice.CreateRenderTarget(426, 360, PixelFormat_RGBA8888,DepthFormat_Unknown))
 	{
@@ -34,15 +35,15 @@ public:
 		GraphicsDevice.Clear(Color_CornflowerBlue);
 
 		SpriteBatch.Begin();
+		SPRITE sp = this->sp_;
+		SpriteBatch.Draw(*sp, Vector3_Zero, 1.0f);
 
 	}
 
 	void NoteDrawEnd(){
 
-		SPRITE sp = this->sp_;
+		
 		FONT font = this->font_;
-
-		SpriteBatch.Draw(*sp, Vector3_Zero, 1.0f);
 
 		SpriteBatch.DrawString(font, Vector2_One * 3.0f, Color(0, 0, 0), Vector2_One * 1.0f, Vector3_Zero, Vector3_Zero, _T("PlayArea:%d"), this->ID_);
 
@@ -51,6 +52,8 @@ public:
 	}
 
 	int GetId(){ return this->ID_; }
+	Vector2 GetSize(){ return this->SIZE_; }
+	float GetNoteHitPos(){ return this->NOTEHITPOS_; }
 
 private:
 
@@ -60,6 +63,7 @@ private:
 	const Vector3 POS_;
 	const Vector2 SIZE_;
 	const int ID_;
+	const float NOTEHITPOS_;
 
 	RENDERTARGET screen_;
 

@@ -1,5 +1,6 @@
 #include "PlayAreaManager.h"
 #include "../PlayArea.h"
+#include "NoteManager.h"
 
 PlayAreaManager::PlayAreaManager(std::shared_ptr<NoteManager> notemana_ptr){
 
@@ -16,15 +17,21 @@ PlayAreaManager::PlayAreaManager(std::shared_ptr<NoteManager> notemana_ptr){
 PlayAreaManager::~PlayAreaManager(){
 
 	for (auto playarea : this->playareas_) delete playarea;
-	// delete *(this->notemana_ptr_); ?
 
 }
 
 void PlayAreaManager::Draw(){
 
+	Vector2 size;
+
 	for (auto playarea : this->playareas_){
 
+		size = playarea->GetSize();
+
 		playarea->NoteDrawBegin();
+
+		this->notemana_ptr_->DrawtoPlayArea(playarea->GetId(),size.y,size.x,playarea->GetNoteHitPos());
+
 		playarea->NoteDrawEnd();
 
 		playarea->ScreenDraw();
