@@ -1,3 +1,4 @@
+#pragma once
 #include "AbstructMiddleLeft.h"
 
 class LayerManager;
@@ -6,7 +7,7 @@ class LayerML : public AbstructMiddleLeft{
 
 public:
 
-	LayerML(LayerManager* layermanager);
+	LayerML();
 
 	~LayerML();
 

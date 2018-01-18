@@ -1,7 +1,7 @@
 #include "PlayAreaManager.h"
-#include "PlayArea.h"
+#include "../PlayArea.h"
 
-PlayAreaManager::PlayAreaManager(){
+PlayAreaManager::PlayAreaManager(std::shared_ptr<NoteManager> notemana_ptr){
 
 	for (int i = 0; i < 3;i++){
 
@@ -9,11 +9,14 @@ PlayAreaManager::PlayAreaManager(){
 
 	}
 
+	this->notemana_ptr_ = notemana_ptr;
+
 }
 
 PlayAreaManager::~PlayAreaManager(){
 
 	for (auto playarea : this->playareas_) delete playarea;
+	// delete *(this->notemana_ptr_); ?
 
 }
 

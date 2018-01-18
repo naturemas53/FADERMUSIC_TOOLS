@@ -2,6 +2,7 @@
 #include <list>
 
 class PMCalcButton;
+class NoteMakeButton;
 
 class SettingMR : public AbstructMiddleRight{
 
@@ -24,6 +25,7 @@ private:
 	std::list<PMCalcButton*> areabuttons_;
 	std::list<PMCalcButton*> heightbuttons_;
 	std::list<PMCalcButton*> timingbuttons_;
+	NoteMakeButton* notemakebutton_;
 
 	int layer_;
 	int area_;

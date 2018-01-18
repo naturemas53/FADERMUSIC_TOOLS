@@ -1,5 +1,7 @@
 #pragma once
 #include "../../ESGLib.h"
+#include "../Manager/NoteManager.h"
+#include <memory>
 
 class AbstructMiddleLeft{
 
@@ -21,6 +23,12 @@ public:
 	};
 
 	virtual void ClickCheck(Vector2 mouse_pos) = 0;
+
+	static void SetNoteManager(std::shared_ptr<NoteManager> notemana_ptr){
+
+		AbstructMiddleLeft::notemana_ptr_ = notemana_ptr;
+
+	}
 
 protected:
 
@@ -46,6 +54,8 @@ protected:
 	};
 
 	const Vector3 POS_;
+
 	static RENDERTARGET screen_;
+	static std::shared_ptr<NoteManager> notemana_ptr_;
 
 };

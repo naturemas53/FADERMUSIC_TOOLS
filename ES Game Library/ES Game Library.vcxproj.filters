@@ -160,6 +160,12 @@
     <Filter Include="ヘッダー ファイル\MyMakeClasses\Note">
       <UniqueIdentifier>{7bb2b727-1961-42cd-aa1a-ba421c5ffaa4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\MyMakeClasses\Manager">
+      <UniqueIdentifier>{41b0115d-fd0e-46c5-9a2c-de09009e0e98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MyMakeClasses\Manager">
+      <UniqueIdentifier>{986d606e-0553-42be-a500-03dfce41ae04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -331,14 +337,23 @@
     <ClCompile Include="MyMakeClasses\Layer.cpp">
       <Filter>ソース ファイル\MyMakeClasses</Filter>
     </ClCompile>
-    <ClCompile Include="MyMakeClasses\LayerManager.cpp">
-      <Filter>ソース ファイル\MyMakeClasses</Filter>
-    </ClCompile>
-    <ClCompile Include="MyMakeClasses\PlayAreaManager.cpp">
-      <Filter>ソース ファイル\MyMakeClasses</Filter>
-    </ClCompile>
     <ClCompile Include="MyMakeClasses\JukeBox.cpp">
       <Filter>ソース ファイル\MyMakeClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\Note\AbsutructNote.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\Note</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\Note\SingleNote.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\Note</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\Manager\LayerManager.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\Manager\NoteManager.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\Manager\PlayAreaManager.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -532,12 +547,6 @@
     <ClInclude Include="MyMakeClasses\Layer.h">
       <Filter>ヘッダー ファイル\MyMakeClasses</Filter>
     </ClInclude>
-    <ClInclude Include="MyMakeClasses\LayerManager.h">
-      <Filter>ヘッダー ファイル\MyMakeClasses</Filter>
-    </ClInclude>
-    <ClInclude Include="MyMakeClasses\PlayAreaManager.h">
-      <Filter>ヘッダー ファイル\MyMakeClasses</Filter>
-    </ClInclude>
     <ClInclude Include="MyMakeClasses\Note\AbstructNote.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\Note</Filter>
     </ClInclude>
@@ -552,6 +561,24 @@
     </ClInclude>
     <ClInclude Include="MyMakeClasses\Button\PlayStopButton.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Note\SingleNote.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Note</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Button\NoteMakeButton.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Button\TakeMRButton.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Manager\LayerManager.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Manager\NoteManager.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Manager\PlayAreaManager.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

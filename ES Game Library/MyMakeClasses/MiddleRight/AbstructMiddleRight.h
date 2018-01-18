@@ -1,5 +1,7 @@
 #pragma once
 #include "../../ESGLib.h"
+#include "../Manager/NoteManager.h"
+#include <memory>
 
 class AbstructMiddleRight{
 
@@ -22,6 +24,12 @@ public:
 
 	virtual void ClickCheck(Vector2 mouse_pos) = 0;
 
+	static void SetNoteManager(std::shared_ptr<NoteManager> notemana_ptr){
+
+		AbstructMiddleRight::notemana_ptr_ = notemana_ptr;
+		 
+	}
+
 protected:
 
 	virtual void MyClassDraw() = 0;//”h¶æ‚É‚æ‚Á‚Ä•`‰æ“à—e‚ªˆá‚¤‚Ì‚Å‚»‚ê
@@ -35,11 +43,14 @@ protected:
 	void ScreenDraw();
 
 	AbstructMiddleRight() :
-	POS_(Vector3(1280.0f - 320.0f,80.0f,0.0f)){
+	POS_(Vector3(1280.0f - 320.0f,80.0f,0.0f)),
+	SCREENSIZE_(Vector2(320.0f,240.0f)){
 
 		if (this->screen_ == nullptr){
 
-			this->screen_ = GraphicsDevice.CreateRenderTarget(320, 240, PixelFormat_RGBA8888, DepthFormat_Unknown);
+			Vector2 size = this->SCREENSIZE_;
+
+			this->screen_ = GraphicsDevice.CreateRenderTarget(size.x, size.y, PixelFormat_RGBA8888, DepthFormat_Unknown);
 
 		}
 
@@ -52,7 +63,9 @@ protected:
 	};
 
 	const Vector3 POS_;
+	const Vector2 SCREENSIZE_;
 	static RENDERTARGET screen_;
 	static FONT font_;
+	static std::shared_ptr<NoteManager> notemana_ptr_;
 
 };

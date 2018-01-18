@@ -27,9 +27,14 @@ public:
 	
 
 	void ChangeMusic();
-	int GetNowTimeToMiliSec(){};
 	int GetElapsedTime(){};
 	DWORD GetNowTimeMiliSec(){
+
+		if (this->music_ == nullptr){
+
+			return 0;
+
+		}
 
 		return this->nowposbyte_ / this->secmilibyte_;
 

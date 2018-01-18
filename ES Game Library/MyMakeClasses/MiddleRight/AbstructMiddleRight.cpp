@@ -2,6 +2,7 @@
 
 RENDERTARGET AbstructMiddleRight::screen_ = nullptr;
 FONT AbstructMiddleRight::font_ = nullptr;
+std::shared_ptr<NoteManager> AbstructMiddleRight::notemana_ptr_ = nullptr;
 
 void AbstructMiddleRight::ScreenDraw(){
 

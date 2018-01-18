@@ -1,5 +1,6 @@
 #include "SettingMR.h"
 #include "../Button/PMCalcButton.h"
+#include "../Button/NoteMakeButton.h"
 #include "../InputSingleton.h"
 
 SettingMR::SettingMR(){
@@ -35,7 +36,7 @@ SettingMR::SettingMR(){
 	this->timingbuttons_.push_back(new PMCalcButton(Vector3(245.0f, 130.0f, 0.0f), _T("«"), Vector2(20.0f, 20.0f),-10.0f));
 	this->timingbuttons_.push_back(new PMCalcButton(Vector3(270.0f, 130.0f, 0.0f), _T("«"), Vector2(20.0f, 20.0f),-1.0f));
 
-
+	this->notemakebutton_ = new NoteMakeButton(Vector3(this->SCREENSIZE_.x - 192.0f, this->SCREENSIZE_.y - 40.0f,0.0f));
 }
 
 SettingMR::~SettingMR(){
@@ -44,6 +45,8 @@ SettingMR::~SettingMR(){
 	for (auto areabutton : this->areabuttons_) delete areabutton;
 	for (auto heightbutton : this->heightbuttons_) delete heightbutton;
 	for (auto timingbutton : this->timingbuttons_) delete timingbutton;
+
+	delete this->notemakebutton_;
 }
 
 void SettingMR::MyClassDraw(){
@@ -74,6 +77,8 @@ void SettingMR::MyClassDraw(){
 	SpriteBatch.DrawString(font, Vector2(225.0f, 110.0f), Color(255, 255, 255), _T("%d"), (this->timing_ / 100) % 10);
 	SpriteBatch.DrawString(font, Vector2(250.0f, 110.0f), Color(255, 255, 255), _T("%d"), (this->timing_ / 10) % 10);
 	SpriteBatch.DrawString(font, Vector2(275.0f, 110.0f), Color(255, 255, 255), _T("%d"), this->timing_ % 10);
+
+	this->notemakebutton_->Draw();
 
 }
 
@@ -112,6 +117,12 @@ void SettingMR::PressCheck(Vector2 mouse_pos){
 	for (auto timingbutton : this->timingbuttons_){
 		if (timingbutton->CollisionPointToMe(mouse_pos, this->POS_))
 			timingbutton->SetNowPush(true);
+	}
+
+	if (this->notemakebutton_->CollisionPointToMe(mouse_pos, this->POS_)){
+
+		this->notemakebutton_->SetNowPush(true);
+
 	}
 
 }
@@ -174,5 +185,19 @@ void SettingMR::ReleaseRun(Vector2 mouse_pos){
 
 		timingbutton->SetNowPush(false);
 	}
+
+	if (this->notemakebutton_->IsPushed(mouse_pos, this->POS_)){
+
+		int layer = this->layer_;
+		int area = this->area_;
+		float height = this->height_;
+		int timing = this->timing_;
+
+		(this->notemana_ptr_)->SettingNote(layer,area,height,timing);
+
+	}
+
+	this->notemakebutton_->SetNowPush(false);
+
 
 }

@@ -4,10 +4,13 @@
 #include "../../MyMakeClasses/Button/SongSelectButton.h"
 #include "../../MyMakeClasses/PlayArea.h"
 #include "../../MyMakeClasses/PreviewSwitch.h"
+#include "../../MyMakeClasses/MiddleLeft/AbstructMiddleLeft.h"
+#include "../../MyMakeClasses/MiddleRight/AbstructMiddleRight.h"
 #include "../../MyMakeClasses/MiddleLeft/LayerML.h"
 #include "../../MyMakeClasses/MiddleRight/SettingMR.h"
-#include "../../MyMakeClasses/LayerManager.h"
-#include "../../MyMakeClasses/PlayAreaManager.h"
+#include "../../MyMakeClasses/Manager/LayerManager.h"
+#include "../../MyMakeClasses/Manager/PlayAreaManager.h"
+#include "../../MyMakeClasses/Manager/NoteManager.h"
 #include "../../MyMakeClasses/InputSingleton.h"
 #include "../../MyMakeClasses/JukeBox.h"
 
@@ -23,7 +26,7 @@ bool EditScene::Initialize()
 
 	StaticInput;//¶¬‚µ‚Äƒ}ƒEƒX‚Ì‰Šú‰»
 
-	this->jukebox_ = new JukeBox();
+	this->jukebox_ptr_ = std::shared_ptr<JukeBox>(new JukeBox());
 
 	for (int i = 0; i < 5;i++){
 
@@ -31,16 +34,16 @@ bool EditScene::Initialize()
 			this->buttonlist_.push_back(new FileButton(Vector3(i * 192.0f, 0.0f, 0.0f)));
 		}
 		else{
-			this->buttonlist_.push_back(new SongSelectButton(Vector3(i * 192.0f, 0.0f, 0.0f),this->jukebox_));
+			this->buttonlist_.push_back(new SongSelectButton(Vector3(i * 192.0f, 0.0f, 0.0f),this->jukebox_ptr_));
 		}
 	}
-	
-	this->playareamanager_ = new PlayAreaManager();
-	this->layermanager_ = new LayerManager();
+	this->notemana_ptr_ = std::shared_ptr<NoteManager>(new NoteManager(this->jukebox_ptr_));
+
+	this->NoteManagerGive();
 	
 	this->previewswitch_ = new PreviewSwitch(Vector3(1280.0f - 320.0f, 0.0f, 0.0f));
 	this->middleright_ = new SettingMR();
-	this->middleleft_ = new LayerML(this->layermanager_);
+	this->middleleft_ = new LayerML();
 
 	return true;
 }
@@ -53,12 +56,13 @@ void EditScene::Finalize()
 {
 	// TODO: Add your finalization logic here
 	for (auto button : this->buttonlist_) delete button;
+
 	delete this->playareamanager_;
-	delete this->layermanager_;
+
 	delete this->previewswitch_;
 	delete this->middleleft_;
 	delete this->middleright_;
-	delete this->jukebox_;
+
 }
 
 /// <summary>
@@ -73,7 +77,7 @@ int EditScene::Update()
     // TODO: Add your update logic here
 	StaticInput.Update();
 
-	this->jukebox_->Update();
+	this->jukebox_ptr_->Update();
 
 	MouseState mouse_state = Mouse->GetState();
 
@@ -106,7 +110,7 @@ int EditScene::Update()
 
 		this->middleright_->ClickCheck(mouse_pos);
 		this->middleleft_->ClickCheck(mouse_pos);
-		this->jukebox_->ClickCheck(mouse_pos);
+		this->jukebox_ptr_->ClickCheck(mouse_pos);
 
 	}
 
@@ -134,7 +138,7 @@ int EditScene::Update()
 		previewswitch_->SetNowPush(false);
 
 		this->middleright_->ClickCheck(mouse_pos);
-		this->jukebox_->ClickCheck(mouse_pos);
+		this->jukebox_ptr_->ClickCheck(mouse_pos);
 
 	}
 
@@ -162,7 +166,7 @@ void EditScene::Draw()
 
 	SpriteBatch.End();
 	
-	this->jukebox_->Draw();
+	this->jukebox_ptr_->Draw();
 
 	this->playareamanager_->Draw();
 
@@ -170,4 +174,13 @@ void EditScene::Draw()
 	this->middleright_->Draw();
 		
 	GraphicsDevice.EndScene();
+}
+
+void EditScene::NoteManagerGive(){
+
+	this->playareamanager_ = new PlayAreaManager(this->notemana_ptr_);
+
+	AbstructMiddleLeft::SetNoteManager(this->notemana_ptr_);
+	AbstructMiddleRight::SetNoteManager(this->notemana_ptr_);
+
 }
