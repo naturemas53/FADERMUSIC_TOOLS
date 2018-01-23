@@ -7,6 +7,7 @@
 #include "../SpriteSingleton.h"
 #include <algorithm>
 #include <math.h>
+#include <fstream>
 
 NoteManager::NoteManager(std::shared_ptr<JukeBox> jukebox_ptr){
 
@@ -123,9 +124,10 @@ void NoteManager::DrawtoPlayArea(int areaid, float areaheight, float areawidth, 
 		type = note->GetType();
 		timing = note->GetTiming();
 
-		if (timing + 1000 < nowtime) continue;
 
 		if (type == SINGLENOTE){
+
+			if (timing + 1000 < nowtime) continue;
 
 			if (labs((long)timing - nowtime) < 1000){
 
@@ -139,7 +141,7 @@ void NoteManager::DrawtoPlayArea(int areaid, float areaheight, float areawidth, 
 			longnote = (LongNote*)note;
 			mostslowtiming = longnote->GetMostSlowTiming();
 
-			if ((long)timing - 1000 < nowtime && (long)mostslowtiming + 1000 > nowtime){
+			if ((long)timing - 1000 < nowtime || (long)mostslowtiming + 1000 > nowtime){
 
 				longnote->PlayAreaDraw(areaheight, areawidth, areanotehit_x, nowtime);
 
@@ -332,5 +334,219 @@ void NoteManager::NowHeightDraw(float areaheight){
 	SPRITE sp = this->sprite_;
 
 	SpriteBatch.Draw(*sp,pos,userect,1.0f);
+
+}
+
+bool NoteManager::MusicScoreExport(){
+
+	//まずチェック
+	unsigned size = this->bpmdatas_.size();
+	if (size == 0) return false; //BPM設定して
+	
+	unsigned areacount = this->allplayarea_.size();
+	unsigned notezerocount = 0;
+
+	for (auto notes : this->allplayarea_){
+
+		size = notes->size();
+		if (size == 0){
+			notezerocount++;
+		}
+
+	}
+
+	if (size == notezerocount) return false; //ノート設定して
+
+	std::vector<AbstructNote*> notes;
+
+	auto l_itr = this->allplayarea_[0]->begin();
+	auto c_itr = this->allplayarea_[1]->begin();
+	auto r_itr = this->allplayarea_[2]->begin();
+
+	auto le_itr = this->allplayarea_[0]->end();
+	auto ce_itr = this->allplayarea_[1]->end();
+	auto re_itr = this->allplayarea_[2]->end();
+
+	int l_timing;
+	int c_timing;
+	int r_timing;
+
+	AbstructNote* innote;
+
+	while (true){
+
+		if (l_itr != le_itr){ l_timing = (*l_itr)->GetTiming(); }
+		else{ l_timing = INT_MAX; }
+		if (c_itr != ce_itr){ c_timing = (*c_itr)->GetTiming(); }
+		else{ c_timing = INT_MAX; }
+		if (r_itr != re_itr){ r_timing = (*r_itr)->GetTiming(); }
+		else{ r_timing = INT_MAX; }
+
+		if (l_timing < c_timing){
+
+			if (l_timing < r_timing){
+
+				innote = (*l_itr);
+				l_itr++;
+
+			}
+			else{
+
+				innote = (*r_itr);
+				r_itr++;
+
+			}
+
+		}
+		else if (c_timing < r_timing){
+
+			innote = (*c_itr);
+			c_itr++;
+
+		}
+		else{
+
+			innote = (*r_itr);
+			r_itr++;
+
+		}
+
+		notes.push_back(innote);
+
+		if ((l_itr == le_itr) && (c_itr == ce_itr) && (r_itr == re_itr)) break;
+
+	}
+
+	wchar_t path[256] = {};
+
+	OPENFILENAME ofn = {};
+	ofn.hwndOwner = NULL;
+	ofn.hInstance = NULL;
+	ofn.lpstrFilter = _T("テキストデータ (.txt)\0*.txt\0\0");
+	ofn.nMaxFile = MAX_PATH;
+	ofn.lpstrFileTitle = path;
+	ofn.nMaxFileTitle = MAX_PATH;
+	ofn.Flags = (OFN_OVERWRITEPROMPT | OFN_FILEMUSTEXIST | OFN_NONETWORKBUTTON);
+	ofn.pvReserved = 0;
+	ofn.dwReserved = 0;
+	ofn.lStructSize = sizeof(ofn);
+
+	if (GetSaveFileName(&ofn)){
+
+		std::wstring wstr = path;
+
+		if (wstr.size() != 0){
+
+			std::ofstream file(wstr, std::ios::out);
+
+			if (file){
+
+				char str[256] = {};
+				file << "BPM" << std::endl;
+
+				for (auto data : this->bpmdatas_){
+					memset(str,0,sizeof(str));
+					
+					sprintf_s(str, sizeof(str),"%06d %03d", data.timing, data.bpm);
+
+					file << str << std::endl;
+
+				}
+
+				file << std::endl << "NOTES" << std::endl;
+
+				NoteType type;
+
+				int playarea;
+				float height;
+				int timing;
+
+				std::vector<PointNote*> points;
+				LongNote* longnote;
+
+				auto itr = points.begin();
+				auto e_itr = points.end();
+
+				if (notes.size() == 0){
+
+					int a = 191919419;
+
+				}
+
+				for (auto note : notes){
+
+					memset(str, 0, sizeof(str));
+					type = note->GetType();
+					playarea = note->GetPlayArea();
+					height = note->GetHeight();
+					timing = note->GetTiming();
+
+					if (type == SINGLENOTE){
+
+						sprintf_s(str, sizeof(str), "%d %06d %.06f S",
+							playarea,timing,height);
+
+						file << str << std::endl;
+
+					}
+					else if (type == LONGNOTE){
+
+						longnote = (LongNote*)note;
+
+						points = longnote->GetPoints();
+
+						itr = points.begin();
+						e_itr = points.end();
+						e_itr--;
+
+						while (itr != points.end()){
+
+							memset(str, 0, sizeof(str));
+							playarea = (*itr)->GetPlayArea();
+							height = (*itr)->GetHeight();
+							timing = (*itr)->GetTiming();
+
+							if (itr != e_itr){
+								sprintf_s(str, sizeof(str), "%d %06d %.06f L",
+									playarea, timing, height);
+							}
+							else{
+
+								sprintf_s(str, sizeof(str), "%d %06d %.06f E",
+									playarea, timing, height);
+
+							}
+
+							file << str << std::endl;
+
+							itr++;
+						}
+
+					}
+
+				}
+
+			}
+			else{
+
+				return false; //ファイルが作れん
+
+			}
+
+		}
+		else{
+
+			return false;//パスが入ってない
+
+		}
+
+	}
+	else{
+
+		return false;//なんかおかしい
+
+	}
+
+	return true;
 
 }

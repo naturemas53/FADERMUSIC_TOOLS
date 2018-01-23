@@ -382,6 +382,9 @@
     <ClCompile Include="MyMakeClasses\MiddleLeft\BpmML.cpp">
       <Filter>ソース ファイル\MyMakeClasses\MiddleLeft</Filter>
     </ClCompile>
+    <ClCompile Include="MyMakeClasses\MiddleLeft\FileML.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\MiddleLeft</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectX\Audio\DXAudio8.hpp">
@@ -641,6 +644,9 @@
       <Filter>ヘッダー ファイル\MyMakeClasses</Filter>
     </ClInclude>
     <ClInclude Include="MyMakeClasses\MiddleLeft\BpmML.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleLeft</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleLeft\FileML.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\MiddleLeft</Filter>
     </ClInclude>
   </ItemGroup>

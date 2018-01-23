@@ -1,3 +1,4 @@
+#pragma once
 #include "AbstructButton.h"
 
 class FreeButton : public AbstructButton{

@@ -186,6 +186,7 @@
     </ClCompile>
     <ClCompile Include="MyMakeClasses\MiddleLeft\AbstructMiddleLeft.cpp" />
     <ClCompile Include="MyMakeClasses\MiddleLeft\BpmML.cpp" />
+    <ClCompile Include="MyMakeClasses\MiddleLeft\FileML.cpp" />
     <ClCompile Include="MyMakeClasses\MiddleLeft\LayerML.cpp" />
     <ClCompile Include="MyMakeClasses\MiddleLeft\SongSelectML.cpp" />
     <ClCompile Include="MyMakeClasses\MiddleRight\AbstructMiddleRight.cpp" />
@@ -282,6 +283,7 @@
     </ClInclude>
     <ClInclude Include="MyMakeClasses\MiddleLeft\AbstructMiddleLeft.h" />
     <ClInclude Include="MyMakeClasses\MiddleLeft\BpmML.h" />
+    <ClInclude Include="MyMakeClasses\MiddleLeft\FileML.h" />
     <ClInclude Include="MyMakeClasses\MiddleLeft\LayerML.h" />
     <ClInclude Include="MyMakeClasses\MiddleLeft\SongSelectML.h" />
     <ClInclude Include="MyMakeClasses\MiddleRight\AbstructMiddleRight.h" />
