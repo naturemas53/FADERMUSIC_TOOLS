@@ -373,17 +373,14 @@
     <ClCompile Include="MyMakeClasses\MiddleRight\SelectMR.cpp">
       <Filter>ソース ファイル\MyMakeClasses\MiddleRight</Filter>
     </ClCompile>
-    <ClCompile Include="MyMakeClasses\Note\LongNote.cpp">
-      <Filter>ソース ファイル\MyMakeClasses\Note</Filter>
-    </ClCompile>
-    <ClCompile Include="MyMakeClasses\Note\PointNote.cpp">
-      <Filter>ソース ファイル\MyMakeClasses\Note</Filter>
-    </ClCompile>
     <ClCompile Include="MyMakeClasses\MiddleLeft\BpmML.cpp">
       <Filter>ソース ファイル\MyMakeClasses\MiddleLeft</Filter>
     </ClCompile>
     <ClCompile Include="MyMakeClasses\MiddleLeft\FileML.cpp">
       <Filter>ソース ファイル\MyMakeClasses\MiddleLeft</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\Note\PointNote.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\Note</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -621,9 +618,6 @@
     </ClInclude>
     <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\DeleteSortRoot.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
-    </ClInclude>
-    <ClInclude Include="MyMakeClasses\Note\LongNote.h">
-      <Filter>ヘッダー ファイル\MyMakeClasses\Note</Filter>
     </ClInclude>
     <ClInclude Include="MyMakeClasses\Note\PointNote.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\Note</Filter>

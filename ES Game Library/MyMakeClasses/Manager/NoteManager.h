@@ -149,6 +149,7 @@ public:
 	}
 
 	bool MusicScoreExport();
+	bool MusicScoreImport();
 
 private:
 

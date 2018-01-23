@@ -1,6 +1,6 @@
 #include "NoteManager.h"
 #include "../Note/SingleNote.h"
-#include "../Note/LongNote.h"
+#include "../Note/"
 #include "../Note/PointNote.h"
 #include "../JukeBox.h"
 #include "../InputSingleton.h"
