@@ -1,18 +1,11 @@
 #include "../../StdAfx.h"
 #include "EditScene.hpp"
-#include "../../MyMakeClasses/Button/FileButton.h"
-#include "../../MyMakeClasses/Button/SongSelectButton.h"
-#include "../../MyMakeClasses/PlayArea.h"
-#include "../../MyMakeClasses/PreviewSwitch.h"
-#include "../../MyMakeClasses/MiddleLeft/AbstructMiddleLeft.h"
-#include "../../MyMakeClasses/MiddleRight/AbstructMiddleRight.h"
-#include "../../MyMakeClasses/MiddleLeft/LayerML.h"
-#include "../../MyMakeClasses/MiddleRight/SettingMR.h"
-#include "../../MyMakeClasses/Manager/LayerManager.h"
 #include "../../MyMakeClasses/Manager/PlayAreaManager.h"
 #include "../../MyMakeClasses/Manager/NoteManager.h"
 #include "../../MyMakeClasses/InputSingleton.h"
 #include "../../MyMakeClasses/JukeBox.h"
+#include "../../MyMakeClasses/Manager/MiddleRightManager.h"
+#include "../../MyMakeClasses/Manager/MiddleLeftManager.h"
 
 /// <summary>
 /// Allows the game to perform any initialization it needs to before starting to run.
@@ -28,22 +21,12 @@ bool EditScene::Initialize()
 
 	this->jukebox_ptr_ = std::shared_ptr<JukeBox>(new JukeBox());
 
-	for (int i = 0; i < 5;i++){
-
-		if (i != 1){
-			this->buttonlist_.push_back(new FileButton(Vector3(i * 192.0f, 0.0f, 0.0f)));
-		}
-		else{
-			this->buttonlist_.push_back(new SongSelectButton(Vector3(i * 192.0f, 0.0f, 0.0f),this->jukebox_ptr_));
-		}
-	}
 	this->notemana_ptr_ = std::shared_ptr<NoteManager>(new NoteManager(this->jukebox_ptr_));
 
-	this->NoteManagerGive();
+	this->area_ptr_ = std::shared_ptr<PlayAreaManager>(new PlayAreaManager(this->notemana_ptr_));
 	
-	this->previewswitch_ = new PreviewSwitch(Vector3(1280.0f - 320.0f, 0.0f, 0.0f));
-	this->middleright_ = new SettingMR();
-	this->middleleft_ = new LayerML();
+	this->middlerightmanager_ = new MiddleRightManager(this->notemana_ptr_,this->area_ptr_);
+	this->middleleftmanager_ = new MiddleLeftManager(this->notemana_ptr_,this->jukebox_ptr_);
 
 	return true;
 }
@@ -55,13 +38,9 @@ bool EditScene::Initialize()
 void EditScene::Finalize()
 {
 	// TODO: Add your finalization logic here
-	for (auto button : this->buttonlist_) delete button;
 
-	delete this->playareamanager_;
-
-	delete this->previewswitch_;
-	delete this->middleleft_;
-	delete this->middleright_;
+	delete this->middleleftmanager_;
+	delete this->middlerightmanager_;
 
 }
 
@@ -78,66 +57,27 @@ int EditScene::Update()
 	StaticInput.Update();
 
 	this->jukebox_ptr_->Update();
+	this->notemana_ptr_->Update();
 
 	MouseState mouse_state = Mouse->GetState();
 
 	POINT point = mouse_state.PointerPosition();
 	Vector2 mouse_pos = Vector2_Zero;
-	mouse_pos.x = point.x;
-	mouse_pos.y = point.y;
+	mouse_pos.x = (float)point.x;
+	mouse_pos.y = (float)point.y;
 
 	if (StaticInput.IsMouseButtonPressed(Mouse_Button1)){
 
-		auto itr = this->buttonlist_.begin();
-		auto end_itr = this->buttonlist_.end();
-
-		for (; itr != end_itr;itr++){
-
-			if ((*itr)->CollisionPointToMe(mouse_pos)){
-
-				(*itr)->SetNowPush(true);
-				break;
-
-			}
-
-		}
-
-		if (previewswitch_->CollisionPointToMe(mouse_pos)){
-
-			previewswitch_->SetNowPush(true);
-
-		}
-
-		this->middleright_->ClickCheck(mouse_pos);
-		this->middleleft_->ClickCheck(mouse_pos);
+		this->middlerightmanager_->ClickCheck(mouse_pos);
+		this->middleleftmanager_->ClickCheck(mouse_pos);
 		this->jukebox_ptr_->ClickCheck(mouse_pos);
 
 	}
 
 	if (StaticInput.IsMouseButtonReleased(Mouse_Button1)){
 
-		for (int i = 0; i < 5;i++){
-
-			if (i != 1){
-			}
-			else{
-				if (this->buttonlist_[i]->IsPushed(mouse_pos)){
-
-					SongSelectButton* button = (SongSelectButton*)this->buttonlist_[i];
-					button->SongSelect();
-
-				}
-
-
-			}
-
-			this->buttonlist_[i]->SetNowPush(false);
-
-		}
-
-		previewswitch_->SetNowPush(false);
-
-		this->middleright_->ClickCheck(mouse_pos);
+		this->middleleftmanager_->ButtonReset();
+		this->middlerightmanager_->ClickCheck(mouse_pos);
 		this->jukebox_ptr_->ClickCheck(mouse_pos);
 
 	}
@@ -157,30 +97,13 @@ void EditScene::Draw()
 	GraphicsDevice.BeginScene();
 
 	GraphicsDevice.SetDefaultRenderTarget();
-
-	SpriteBatch.Begin();
-
-	for (auto button : this->buttonlist_) button->Draw();
-
-	this->previewswitch_->Draw();
-
-	SpriteBatch.End();
 	
 	this->jukebox_ptr_->Draw();
 
-	this->playareamanager_->Draw();
+	this->area_ptr_->Draw();
 
-	this->middleleft_->Draw();
-	this->middleright_->Draw();
+	this->middleleftmanager_->Draw();
+	this->middlerightmanager_->Draw();
 		
 	GraphicsDevice.EndScene();
-}
-
-void EditScene::NoteManagerGive(){
-
-	this->playareamanager_ = new PlayAreaManager(this->notemana_ptr_);
-
-	AbstructMiddleLeft::SetNoteManager(this->notemana_ptr_);
-	AbstructMiddleRight::SetNoteManager(this->notemana_ptr_);
-
 }

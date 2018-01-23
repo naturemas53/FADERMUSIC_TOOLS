@@ -40,7 +40,6 @@ public:
 	~Layer() = default;
 
 	void NoteDrawBegin();
-	//void NoteDraw();
 	void NoteDrawEnd();
 
 	void ScreenDraw();
@@ -67,6 +66,7 @@ public:
 
 	void ChengeSoundFlag(){ this->soundflag_ = !(this->soundflag_); }
 
+	Vector3 GetPos(){ return this->POS_; }
 	int GetId(){ return this->ID_; }
 	float GetNoteHitPos(){ return this->NOTEHITPOS_; }
 	Vector2 GetSize(){ return this->SIZE_; }

@@ -30,6 +30,12 @@ public:
 		 
 	}
 
+	AbstructMiddleRight* GetNextMR(){
+
+		return this->nextmr_;
+
+	}
+
 protected:
 
 	virtual void MyClassDraw() = 0;//”h¶æ‚É‚æ‚Á‚Ä•`‰æ“à—e‚ªˆá‚¤‚Ì‚Å‚»‚ê
@@ -60,6 +66,8 @@ protected:
 
 		}
 
+		nextmr_ = nullptr;
+
 	};
 
 	const Vector3 POS_;
@@ -67,5 +75,7 @@ protected:
 	static RENDERTARGET screen_;
 	static FONT font_;
 	static std::shared_ptr<NoteManager> notemana_ptr_;
+
+	AbstructMiddleRight* nextmr_;
 
 };

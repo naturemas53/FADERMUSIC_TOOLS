@@ -51,6 +51,7 @@ public:
 
 	}
 
+	Vector3 GetPos(){ return this->POS_; }
 	int GetId(){ return this->ID_; }
 	Vector2 GetSize(){ return this->SIZE_; }
 	float GetNoteHitPos(){ return this->NOTEHITPOS_; }

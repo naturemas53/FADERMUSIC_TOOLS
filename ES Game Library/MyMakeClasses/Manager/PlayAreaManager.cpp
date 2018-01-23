@@ -1,6 +1,4 @@
 #include "PlayAreaManager.h"
-#include "../PlayArea.h"
-#include "NoteManager.h"
 
 PlayAreaManager::PlayAreaManager(std::shared_ptr<NoteManager> notemana_ptr){
 

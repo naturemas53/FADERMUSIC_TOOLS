@@ -166,6 +166,9 @@
     <Filter Include="ソース ファイル\MyMakeClasses\Manager">
       <UniqueIdentifier>{986d606e-0553-42be-a500-03dfce41ae04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot">
+      <UniqueIdentifier>{d78efda7-3d5f-4efa-a100-c327b04f5386}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -355,6 +358,30 @@
     <ClCompile Include="MyMakeClasses\Manager\PlayAreaManager.cpp">
       <Filter>ソース ファイル\MyMakeClasses\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="MyMakeClasses\Manager\MiddleRightManager.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\Manager\MiddleLeftManager.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\MiddleLeft\SongSelectML.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\MiddleLeft</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\MiddleRight\MenuMR.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\MiddleRight</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\MiddleRight\SelectMR.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\MiddleRight</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\Note\LongNote.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\Note</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\Note\PointNote.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\Note</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\MiddleLeft\BpmML.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\MiddleLeft</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectX\Audio\DXAudio8.hpp">
@@ -532,9 +559,6 @@
     <ClInclude Include="MyMakeClasses\Button\AbstructButton.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
     </ClInclude>
-    <ClInclude Include="MyMakeClasses\Button\FileButton.h">
-      <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
-    </ClInclude>
     <ClInclude Include="MyMakeClasses\Button\PMCalcButton.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
     </ClInclude>
@@ -556,20 +580,11 @@
     <ClInclude Include="MyMakeClasses\InputSingleton.h">
       <Filter>ヘッダー ファイル\MyMakeClasses</Filter>
     </ClInclude>
-    <ClInclude Include="MyMakeClasses\Button\SongSelectButton.h">
-      <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
-    </ClInclude>
     <ClInclude Include="MyMakeClasses\Button\PlayStopButton.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
     </ClInclude>
     <ClInclude Include="MyMakeClasses\Note\SingleNote.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\Note</Filter>
-    </ClInclude>
-    <ClInclude Include="MyMakeClasses\Button\NoteMakeButton.h">
-      <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="MyMakeClasses\Button\TakeMRButton.h">
-      <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
     </ClInclude>
     <ClInclude Include="MyMakeClasses\Manager\LayerManager.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\Manager</Filter>
@@ -579,6 +594,54 @@
     </ClInclude>
     <ClInclude Include="MyMakeClasses\Manager\PlayAreaManager.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Manager\MiddleRightManager.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Manager\MiddleLeftManager.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Button\FreeButton.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleLeft\SongSelectML.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleLeft</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleRight\MenuMR.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleRight\SelectMR.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\AbstructSortRoot.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\DeleteSortRoot.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Note\LongNote.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Note</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Note\PointNote.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Note</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\MakeLongSortRoot.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\SettingSortRoot.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Button\TakeMLButton.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\UniteSettingSortRoot.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\BPM_DATA_STRUCT.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleLeft\BpmML.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleLeft</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
