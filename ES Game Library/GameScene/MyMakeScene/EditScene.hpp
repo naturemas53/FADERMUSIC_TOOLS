@@ -3,16 +3,12 @@
 #include <vector>
 #include "../GameScene.hpp"
 #include "../../ESGLib.h"
+#include <memory>
 
-class AbstructButton;
-class PreviewSwitch;
-
-class LayerManager;
 class PlayAreaManager;
-
-class AbstructMiddleRight;
-class AbstructMiddleLeft;
-
+class NoteManager;
+class MiddleRightManager;
+class MiddleLeftManager;
 class JukeBox;
 
 class EditScene : public CGameScene {
@@ -66,13 +62,14 @@ private:
 
 private:
 	// 変数宣言
-	std::vector<AbstructButton*> buttonlist_;
-	PlayAreaManager* playareamanager_;
-	LayerManager* layermanager_;
-	PreviewSwitch* previewswitch_;
-	AbstructMiddleRight* middleright_;
-	AbstructMiddleLeft* middleleft_;
-	JukeBox* jukebox_;
+	std::shared_ptr<PlayAreaManager> area_ptr_;
+	MiddleRightManager* middlerightmanager_;
+	MiddleLeftManager* middleleftmanager_;
+	std::shared_ptr<NoteManager> notemana_ptr_;
+	std::shared_ptr<JukeBox> jukebox_ptr_;
+
+	//いつか使う
+	//PreviewSwitch* previewswitch_;
 
 	// 関数プロトタイプ
 

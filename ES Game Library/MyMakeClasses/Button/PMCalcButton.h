@@ -9,12 +9,7 @@ public:
 		ADDVALUE_(addvalue){};
 	~PMCalcButton() = default;
 
-template <typename T>
-void CalcValue(T& value){
-
-	value += (T)this->ADDVALUE_;
-
-}
+	float GetValue(){ return this->ADDVALUE_; }
 
 private:
 

@@ -1,14 +1,16 @@
 #include "LayerML.h"
 #include "../Layer.h"
-#include "../LayerManager.h"
+#include "../Manager/LayerManager.h"
 
-LayerML::LayerML(LayerManager* layermanager){
+LayerML::LayerML(){
 
-	this->layermanager_ = layermanager;
+	this->layermanager_ = new LayerManager(this->notemana_ptr_);
 
 }
 
 LayerML::~LayerML(){
+
+	delete this->layermanager_;
 
 }
 

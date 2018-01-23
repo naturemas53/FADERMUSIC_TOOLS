@@ -9,6 +9,7 @@ public:
 	Layer(Vector3 pos,int id):
 	POS_(pos),
 	SIZE_(Vector2(480.0f,70.0f)),
+	NOTEHITPOS_(180.0f),
 	PANELUSERECT_(RectWH(0,80,120,70)),
 	SPEAKERUSERECT_(RectWH(0,150,64,64)),
 	ID_(id){
@@ -39,7 +40,6 @@ public:
 	~Layer() = default;
 
 	void NoteDrawBegin();
-	//void NoteDraw();
 	void NoteDrawEnd();
 
 	void ScreenDraw();
@@ -66,7 +66,10 @@ public:
 
 	void ChengeSoundFlag(){ this->soundflag_ = !(this->soundflag_); }
 
+	Vector3 GetPos(){ return this->POS_; }
 	int GetId(){ return this->ID_; }
+	float GetNoteHitPos(){ return this->NOTEHITPOS_; }
+	Vector2 GetSize(){ return this->SIZE_; }
 
 private:
 
@@ -76,6 +79,7 @@ private:
 
 	const Vector3 POS_;
 	const Vector2 SIZE_;
+	const float NOTEHITPOS_;
 	const RectWH PANELUSERECT_;
 	const RectWH SPEAKERUSERECT_;
 	const int ID_;

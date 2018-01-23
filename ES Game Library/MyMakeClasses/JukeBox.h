@@ -27,15 +27,33 @@ public:
 	
 
 	void ChangeMusic();
-	int GetNowTimeToMiliSec(){};
 	int GetElapsedTime(){};
 	DWORD GetNowTimeMiliSec(){
+
+		if (this->music_ == nullptr){
+
+			return 0;
+
+		}
 
 		return this->nowposbyte_ / this->secmilibyte_;
 
 	}
 
+	DWORD GetLengthMiliSec(){
+
+		if (this->music_ == nullptr){
+
+			return 0;
+
+		}
+
+		return this->lengthbyte_ / this->secmilibyte_;
+
+	}
+
 	bool IsPlaying(){ return this->music_->IsPlaying(); }
+	bool IsInMusic(){ return (this->music_ != nullptr); }
 
 	void ClickCheck(Vector2 mouse_pos);
 

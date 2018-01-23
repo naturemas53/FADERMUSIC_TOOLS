@@ -170,13 +170,37 @@
     <ClCompile Include="MyMakeClasses\Button\AbstructButton.cpp" />
     <ClCompile Include="MyMakeClasses\JukeBox.cpp" />
     <ClCompile Include="MyMakeClasses\Layer.cpp" />
-    <ClCompile Include="MyMakeClasses\LayerManager.cpp" />
+    <ClCompile Include="MyMakeClasses\Manager\LayerManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\Manager\MiddleLeftManager.cpp" />
+    <ClCompile Include="MyMakeClasses\Manager\MiddleRightManager.cpp" />
+    <ClCompile Include="MyMakeClasses\Manager\NoteManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\Manager\PlayAreaManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="MyMakeClasses\MiddleLeft\AbstructMiddleLeft.cpp" />
+    <ClCompile Include="MyMakeClasses\MiddleLeft\BpmML.cpp" />
+    <ClCompile Include="MyMakeClasses\MiddleLeft\FileML.cpp" />
     <ClCompile Include="MyMakeClasses\MiddleLeft\LayerML.cpp" />
+    <ClCompile Include="MyMakeClasses\MiddleLeft\SongSelectML.cpp" />
     <ClCompile Include="MyMakeClasses\MiddleRight\AbstructMiddleRight.cpp" />
-    <ClCompile Include="MyMakeClasses\MiddleRight\SettingMR.cpp" />
+    <ClCompile Include="MyMakeClasses\MiddleRight\MenuMR.cpp" />
+    <ClCompile Include="MyMakeClasses\MiddleRight\SelectMR.cpp" />
+    <ClCompile Include="MyMakeClasses\MiddleRight\SettingMR.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\Note\AbsutructNote.cpp" />
+    <ClCompile Include="MyMakeClasses\Note\LongNote.cpp" />
+    <ClCompile Include="MyMakeClasses\Note\PointNote.cpp" />
+    <ClCompile Include="MyMakeClasses\Note\SingleNote.cpp" />
     <ClCompile Include="MyMakeClasses\PlayArea.cpp" />
-    <ClCompile Include="MyMakeClasses\PlayAreaManager.cpp" />
     <ClCompile Include="MyMakeClasses\PreviewSwitch.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -235,24 +259,53 @@
     </ClInclude>
     <ClInclude Include="GameScene\SceneShared.hpp" />
     <ClInclude Include="GameScene\TemplateScene.hpp" />
+    <ClInclude Include="MyMakeClasses\BPM_DATA_STRUCT.h" />
     <ClInclude Include="MyMakeClasses\Button\AbstructButton.h" />
+    <ClInclude Include="MyMakeClasses\Button\FreeButton.h" />
     <ClInclude Include="MyMakeClasses\Button\PlayStopButton.h" />
     <ClInclude Include="MyMakeClasses\Button\PMCalcButton.h" />
-    <ClInclude Include="MyMakeClasses\Button\FileButton.h" />
-    <ClInclude Include="MyMakeClasses\Button\SongSelectButton.h" />
+    <ClInclude Include="MyMakeClasses\Button\TakeMLButton.h" />
     <ClInclude Include="MyMakeClasses\JukeBox.h" />
     <ClInclude Include="MyMakeClasses\Layer.h" />
-    <ClInclude Include="MyMakeClasses\LayerManager.h" />
-    <ClInclude Include="MyMakeClasses\MiddleLeft\AbstructMiddleLeft.h" />
-    <ClInclude Include="MyMakeClasses\MiddleLeft\LayerML.h" />
-    <ClInclude Include="MyMakeClasses\MiddleRight\AbstructMiddleRight.h" />
-    <ClInclude Include="MyMakeClasses\MiddleRight\SettingMR.h" />
-    <ClInclude Include="MyMakeClasses\Note\AbstructNote.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    <ClInclude Include="MyMakeClasses\Manager\LayerManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="MyMakeClasses\Manager\MiddleLeftManager.h" />
+    <ClInclude Include="MyMakeClasses\Manager\MiddleRightManager.h" />
+    <ClInclude Include="MyMakeClasses\Manager\NoteManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Manager\PlayAreaManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleLeft\AbstructMiddleLeft.h" />
+    <ClInclude Include="MyMakeClasses\MiddleLeft\BpmML.h" />
+    <ClInclude Include="MyMakeClasses\MiddleLeft\FileML.h" />
+    <ClInclude Include="MyMakeClasses\MiddleLeft\LayerML.h" />
+    <ClInclude Include="MyMakeClasses\MiddleLeft\SongSelectML.h" />
+    <ClInclude Include="MyMakeClasses\MiddleRight\AbstructMiddleRight.h" />
+    <ClInclude Include="MyMakeClasses\MiddleRight\MenuMR.h" />
+    <ClInclude Include="MyMakeClasses\MiddleRight\SelectMR.h" />
+    <ClInclude Include="MyMakeClasses\MiddleRight\SettingMR.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\AbstructSortRoot.h" />
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\DeleteSortRoot.h" />
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\MakeLongSortRoot.h" />
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\SettingSortRoot.h" />
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\UniteSettingSortRoot.h" />
+    <ClInclude Include="MyMakeClasses\Note\AbstructNote.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Note\LongNote.h" />
+    <ClInclude Include="MyMakeClasses\Note\PointNote.h" />
+    <ClInclude Include="MyMakeClasses\Note\SingleNote.h" />
     <ClInclude Include="MyMakeClasses\PlayArea.h" />
-    <ClInclude Include="MyMakeClasses\PlayAreaManager.h" />
     <ClInclude Include="MyMakeClasses\PreviewSwitch.h" />
     <ClInclude Include="MyMakeClasses\SpriteSingleton.h" />
     <ClInclude Include="MyMakeClasses\InputSingleton.h" />
