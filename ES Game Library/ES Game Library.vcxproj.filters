@@ -376,14 +376,14 @@
     <ClCompile Include="MyMakeClasses\MiddleLeft\BpmML.cpp">
       <Filter>ソース ファイル\MyMakeClasses\MiddleLeft</Filter>
     </ClCompile>
-    <ClCompile Include="MyMakeClasses\MiddleLeft\FileML.cpp">
-      <Filter>ソース ファイル\MyMakeClasses\MiddleLeft</Filter>
-    </ClCompile>
     <ClCompile Include="MyMakeClasses\Note\PointNote.cpp">
       <Filter>ソース ファイル\MyMakeClasses\Note</Filter>
     </ClCompile>
     <ClCompile Include="MyMakeClasses\Note\LongNote.cpp">
       <Filter>ソース ファイル\MyMakeClasses\Note</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\MiddleLeft\FileML.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\MiddleLeft</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -628,9 +628,6 @@
     <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\SettingSortRoot.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
     </ClInclude>
-    <ClInclude Include="MyMakeClasses\Button\TakeMLButton.h">
-      <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
-    </ClInclude>
     <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\UniteSettingSortRoot.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
     </ClInclude>
@@ -648,6 +645,9 @@
     </ClInclude>
     <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\AbstructSortRoot.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Button\TakeMLButton.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

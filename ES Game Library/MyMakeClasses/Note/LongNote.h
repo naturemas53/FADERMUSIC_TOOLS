@@ -10,13 +10,17 @@ public:
 	LongNote(AbstructNote* addnote):
 		AbstructNote(RectWH(222, 160, 30, 30), LONGNOTE){
 
-		PointNote* add = new PointNote(addnote);
 		this->ValueCopy(addnote);
 
+		PointNote* add = new PointNote(addnote);
 		this->points_.push_back(add);
 
 	}
-	~LongNote();
+	~LongNote(){
+	
+		for (auto point : this->points_) delete point;
+	
+	};
 
 	virtual void PlayAreaDraw(float drawareaheight, float drawareawidth, float notehit_xpos, DWORD nowtime);
 

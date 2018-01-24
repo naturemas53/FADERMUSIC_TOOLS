@@ -3,7 +3,7 @@
 struct BPM_DATA{
 
 	int timing;
-	unsigned bpm;
+	int bpm;
 
 	BPM_DATA(int timing, int bpm){
 

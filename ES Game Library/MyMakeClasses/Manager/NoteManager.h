@@ -153,6 +153,8 @@ public:
 
 private:
 
+	void AddNote(AbstructNote* addnote);
+
 	bool CanAddNote(std::vector<AbstructNote*>& notes, AbstructNote* addnote);
 	void NowHeightDraw(float areaheight);
 

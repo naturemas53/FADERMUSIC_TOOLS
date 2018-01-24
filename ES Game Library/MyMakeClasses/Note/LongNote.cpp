@@ -21,6 +21,14 @@ void LongNote::PlayAreaDraw(float drawareaheight, float drawareawidth, float not
 		startpoint = (*itr)->GetPlayAreaPos(drawareaheight, drawareawidth, notehit_xpos, nowtime);
 		goalpoint = (*(itr + 1))->GetPlayAreaPos(drawareaheight, drawareawidth, notehit_xpos, nowtime);
 
+		if (goalpoint.y > startpoint.y){
+
+			//ƒm[ƒg‚Ì‘å‚«‚³
+			startpoint.x += 30.0f;
+			goalpoint.x += 30.0f;
+
+		}
+
 		dir = goalpoint - startpoint;
 
 		degrees = MathHelper_Atan2(dir.y,dir.x);

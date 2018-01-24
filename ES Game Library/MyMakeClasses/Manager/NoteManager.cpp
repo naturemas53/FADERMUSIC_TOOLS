@@ -1,6 +1,6 @@
 #include "NoteManager.h"
 #include "../Note/SingleNote.h"
-#include "../Note/"
+#include "../Note/LongNote.h"
 #include "../Note/PointNote.h"
 #include "../JukeBox.h"
 #include "../InputSingleton.h"
@@ -165,18 +165,25 @@ void NoteManager::AddNote(int layerid, int areaid, float height, int timing){
 		newnote->SetHeight(height);
 		newnote->SetTiming(timing);
 
-		
-		if (this->CanAddNote(*(this->allplayarea_[areaid]), newnote)){
-		
-			this->CanAddNote(*(this->alllayer_[layerid]), newnote);//こいつは入れるだけ　入れらんなかったらそれはそれで
-			return;
-		}
-		else{
+		this->AddNote(newnote);
 
-			delete newnote;
-			return;
+}
 
-		}
+void NoteManager::AddNote(AbstructNote* addnote){
+
+	int areaid = addnote->GetPlayArea();
+
+	if (this->CanAddNote(*(this->allplayarea_[areaid]), addnote)){
+
+		this->CanAddNote(*(this->alllayer_[0]), addnote);//こいつは入れるだけ　入れらんなかったらそれはそれで
+		return;
+	}
+	else{
+
+		delete addnote;
+		return;
+
+	}
 
 }
 
@@ -548,5 +555,154 @@ bool NoteManager::MusicScoreExport(){
 	}
 
 	return true;
+
+}
+
+bool NoteManager::MusicScoreImport(){
+
+	for (auto notes : this->allplayarea_){
+
+		for (auto note : (*notes)){
+
+			delete note;
+
+		}
+
+		notes->clear();
+
+	}
+
+	for (auto notes : this->alllayer_){
+
+		notes->clear();
+
+	}
+
+	this->bpmdatas_.clear();
+
+	wchar_t wstr[256] = {};
+
+	OPENFILENAME ofn = {};
+	ofn.hwndOwner = NULL;
+	ofn.hInstance = NULL;
+	ofn.lpstrFilter = _T("譜面データ (.txt)\0*.txt\0\0");
+	ofn.nMaxFile = MAX_PATH;
+	ofn.lpstrFileTitle = wstr;
+	ofn.nMaxFileTitle = MAX_PATH;
+	ofn.Flags = (OFN_OVERWRITEPROMPT | OFN_FILEMUSTEXIST | OFN_NONETWORKBUTTON);
+	ofn.pvReserved = 0;
+	ofn.dwReserved = 0;
+	ofn.lStructSize = sizeof(ofn);
+
+	if (GetOpenFileNameW(&ofn)){
+
+		std::wstring path = wstr;
+		if (path.size() != 0){
+
+			std::ifstream file(wstr,std::ios::in);
+
+			if (file){
+
+				std::string str;
+
+				while (true){
+
+					if (!getline(file, str)) return false;
+
+					if (str == "BPM") break;
+
+				}
+
+				int timing = 0;
+				int bpm = 0;
+
+				while (true){
+
+					if (!getline(file, str)) return false;
+
+					if (str.size() == 0) break;
+
+					sscanf_s(str.c_str(),"%d %d",&timing,&bpm);
+
+					this->AddBpmData(BPM_DATA(timing,bpm));
+
+				}
+
+				while (true){
+
+					if (!getline(file, str)) return false;
+
+					if (str == "NOTES") break;
+
+				}
+
+				float height = 0.0f;
+				int playarea = 0;
+				char type = 0;
+
+				AbstructNote* note;
+				SingleNote* singlenote;
+				LongNote* longnote;
+				PointNote* pointnote;
+
+				while (true){
+
+					if (!getline(file, str)) return true;
+					if (str.size() == 0) continue;
+
+					sscanf(str.c_str(),"%d %d %f %c",&playarea,&timing,&height,&type);
+
+					singlenote = new SingleNote();
+					singlenote->SetLayer(0);
+					singlenote->SetPlayArea(playarea);
+					singlenote->SetHeight(height);
+					singlenote->SetTiming(timing);
+
+					note = singlenote;
+
+					if (type == 'L'){
+
+						longnote = new LongNote(singlenote);
+
+						delete singlenote;
+
+						note = longnote;
+
+						while (true){
+
+							if (!getline(file, str)) return false;
+							if (str.size() == 0) continue;
+
+							sscanf(str.c_str(), "%d %d %f %c", &playarea, &timing, &height, &type);
+
+							singlenote = new SingleNote();
+							singlenote->SetLayer(0);
+							singlenote->SetPlayArea(playarea);
+							singlenote->SetHeight(height);
+							singlenote->SetTiming(timing);
+
+							pointnote = new PointNote(singlenote);
+							delete singlenote;
+
+							longnote->AddPoint(pointnote);
+
+							if (type == 'E') break;
+
+						}
+
+					}
+
+					this->AddNote(note);
+
+				}
+
+
+			}
+
+		}
+
+	}
+	
+	return false;
 
 }
