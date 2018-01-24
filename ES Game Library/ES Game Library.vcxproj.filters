@@ -382,6 +382,9 @@
     <ClCompile Include="MyMakeClasses\Note\PointNote.cpp">
       <Filter>ソース ファイル\MyMakeClasses\Note</Filter>
     </ClCompile>
+    <ClCompile Include="MyMakeClasses\Note\LongNote.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\Note</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectX\Audio\DXAudio8.hpp">
@@ -613,9 +616,6 @@
     <ClInclude Include="MyMakeClasses\MiddleRight\SelectMR.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight</Filter>
     </ClInclude>
-    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\AbstructSortRoot.h">
-      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
-    </ClInclude>
     <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\DeleteSortRoot.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
     </ClInclude>
@@ -642,6 +642,12 @@
     </ClInclude>
     <ClInclude Include="MyMakeClasses\MiddleLeft\FileML.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\MiddleLeft</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Note\LongNote.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Note</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\AbstructSortRoot.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
