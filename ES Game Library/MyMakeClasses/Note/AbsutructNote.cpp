@@ -1,7 +1,9 @@
 #include "AbstructNote.h"
 #include "../SpriteSingleton.h"
+#include <string>
 
 SPRITE AbstructNote::sp_ = nullptr;
+SOUND AbstructNote::clap_ = nullptr;
 
 AbstructNote::AbstructNote(RectWH userect, NoteType type) :
 USERECT_(userect),
@@ -15,7 +17,7 @@ SIZE_(Vector2(30.0f, 30.0f)){
 
 	}
 
-	this->clapflag_ = true;
+	this->clapflag_ = false;
 	this->selectflag_ = false;
 
 }
@@ -116,5 +118,15 @@ Vector3 AbstructNote::CalcPos(float drawareaheight, float drawareawidth, float n
 	pos.y = y_pos;
 
 	return pos;
+
+}
+
+void AbstructNote::PlayClap(){
+
+	if (AbstructNote::clap_ != nullptr){
+
+		AbstructNote::clap_->Play();
+
+	}
 
 }

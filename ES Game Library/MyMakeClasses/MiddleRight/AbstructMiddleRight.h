@@ -43,7 +43,7 @@ protected:
 	void ScreenReady(){
 
 		GraphicsDevice.SetRenderTarget(this->screen_);
-		GraphicsDevice.Clear(Color_Green);
+		GraphicsDevice.Clear(Color(0.0f,1.0f,0.0f,0.0f));
 
 	}
 	void ScreenDraw();

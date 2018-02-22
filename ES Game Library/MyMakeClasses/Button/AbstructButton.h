@@ -2,6 +2,7 @@
 
 #include "../SpriteSingleton.h"
 #include <string>
+#include "../InputSingleton.h"
 
 class AbstructButton{
 
@@ -12,6 +13,14 @@ public:
 	virtual void Draw();
 
 	bool CollisionPointToMe(Vector2 mousepoint,Vector3 correctionpos = Vector3_Zero){
+
+		//if (this->longopenflag_){
+		//	if (!StaticInput.IsMouseLeftButtonPush()) return false;
+		//}
+		//else{
+		//	if (!StaticInput.IsMouseButtonPressed(Mouse_Button1)) return false;
+		//}
+
 
 		Vector3 pos = this->POS_ + correctionpos;
 		Vector2 size = this->SIZE_;
@@ -35,14 +44,15 @@ public:
 
 protected:
 
-	AbstructButton(Vector3 pos,std::wstring name,Vector2 size):
+	AbstructButton(Vector3 pos, std::wstring name, Vector2 size, bool longopenflag = false) :
 	POS_(pos),
 	SIZE_(size),
 	SCALE_(Vector2((size.x / IMAGESIZE_.x), (size.y / IMAGESIZE_.y))),
 	SPRITES_(StaticSprite.GetSprite()),
 	NAMEFONT_(GraphicsDevice.CreateDefaultFont()),
 	nowpush_(false),
-	name_(name)
+	name_(name),
+	longopenflag_(longopenflag)
 	{};
 
 	virtual void ButtonDraw();
@@ -59,5 +69,6 @@ protected:
 	
 	std::wstring name_;
 	bool nowpush_;
+	bool longopenflag_;
 
 };

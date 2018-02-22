@@ -55,8 +55,17 @@ public:
 		if (timing > 999999) timing = 999999;
 		
 		this->timing_ = timing; }
-	void SetClapFlag(bool flag){ this->clapflag_ = flag; }
+	//void SetClapFlag(bool flag){ this->clapflag_ = flag; }
 	void SetSelectFlag(bool flag){ this->selectflag_ = flag; }
+	static void SetClapSound(){
+
+		if (AbstructNote::clap_ == nullptr){
+
+			AbstructNote::clap_ = SoundDevice.CreateSoundFromFile(_T("pushsound.wav"));
+
+		}
+
+	}
 
 
 	//ólÅXÇ»èÍèäÇ≈ï`âÊÇ∑ÇÈÇΩÇﬂÅA
@@ -79,10 +88,13 @@ public:
 
 protected:
 
-	Vector3 CalcPos(float drawareaheight, float drawareawidth, float notehit_xpos, DWORD nowtime);
 	AbstructNote(RectWH userect, NoteType type);
 
+	Vector3 CalcPos(float drawareaheight, float drawareawidth, float notehit_xpos, DWORD nowtime);
+	void PlayClap();
+
 	static SPRITE sp_;
+	static SOUND clap_;
 
 	const RectWH USERECT_;
 	const RectWH MARKUSERECT_;

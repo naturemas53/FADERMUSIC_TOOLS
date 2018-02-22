@@ -71,9 +71,8 @@ public:
 	virtual LONG  GetPan() = 0;
 	virtual DWORD GetFrequency() = 0;
 	virtual DWORD GetState() = 0;
-	virtual DWORD GetLength() = 0;
 	virtual DWORD GetLengthByte() = 0;
-	virtual DWORD Get1SecMiliByte() = 0;
+	virtual DWORD Get1SecByte() = 0;
 	virtual DWORD GetNowPosByte() = 0;
 
 	virtual bool IsPlaying() = 0;
@@ -106,9 +105,8 @@ public:
 	virtual LONG  GetPan();
 	virtual DWORD GetFrequency();
 	virtual DWORD GetState();
-	virtual DWORD GetLength();
 	virtual DWORD GetLengthByte();
-	virtual DWORD Get1SecMiliByte();
+	virtual DWORD Get1SecByte();
 	virtual DWORD GetNowPosByte();
 
 	virtual bool IsPlaying() { return (GetState() & DSBSTATUS_PLAYING) != 0; }
@@ -150,9 +148,8 @@ public:
 	virtual LONG  GetPan()       { return DSBPAN_CENTER; }
 	virtual DWORD GetFrequency() { return 0; }
 	virtual DWORD GetState()     { return 0; }
-	virtual DWORD GetLength(){ return 0; }
 	virtual DWORD GetLengthByte(){ return 0; }
-	virtual DWORD Get1SecMiliByte(){ return 0; }
+	virtual DWORD Get1SecByte(){ return 0; }
 	virtual DWORD GetNowPosByte(){ return 0; }
 
 	virtual bool IsPlaying() { return false; }

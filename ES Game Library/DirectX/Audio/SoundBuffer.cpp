@@ -224,27 +224,6 @@ DWORD CSoundBuffer::GetState()
 }
 
 //------------------------------------------------------------------------------
-//	長さ取得
-//------------------------------------------------------------------------------
-
-DWORD CSoundBuffer::GetLength(){
-
-	DWORD buffersize = 0;
-	DWORD secsize = 0;
-
-	DSBCAPS cap = {};
-	cap.dwSize = sizeof(cap);
-	m_pDSBuffer->GetCaps(&cap);
-
-	buffersize = cap.dwBufferBytes;
-	
-	secsize = Get1SecMiliByte();
-
-	return buffersize / secsize;
-
-}
-
-//------------------------------------------------------------------------------
 //	バイトの大きさ取得
 //------------------------------------------------------------------------------
 DWORD CSoundBuffer::GetLengthByte(){
@@ -258,9 +237,9 @@ DWORD CSoundBuffer::GetLengthByte(){
 }
 
 //------------------------------------------------------------------------------
-//	1秒当たりのバイト数計算
+//	1ミリ秒当たりのバイト数計算
 //------------------------------------------------------------------------------
-DWORD CSoundBuffer::Get1SecMiliByte(){
+DWORD CSoundBuffer::Get1SecByte(){
 
 	DWORD formatsize = 0;
 	m_pDSBuffer->GetFormat(NULL, NULL, &formatsize);
@@ -268,7 +247,7 @@ DWORD CSoundBuffer::Get1SecMiliByte(){
 	WAVEFORMATEX format = {};
 	m_pDSBuffer->GetFormat(&format, formatsize, NULL);
 
-	return (format.wBitsPerSample * format.nSamplesPerSec * format.nChannels / 8 / 1000);
+	return ( (format.wBitsPerSample / 8) * format.nSamplesPerSec * format.nChannels);
 
 }
 

@@ -6,8 +6,10 @@
 enum SELECTMODE{
 
 	SETTINGMODE,
-	UNITEMODE,
+	DOUBLEUNITEMODE,
+	HEIGHTUNITEMODE,
 	LONGMAKEMODE,
+	LONGBREAKMODE,
 	DELETEMODE
 
 };
@@ -28,12 +30,6 @@ protected:
 	void AddNote(AbstructNote* addnote){
 
 		addnote->SetSelectFlag(true);
-
-		unsigned size = this->selectnotes_.size();
-		if (size == 0){
-			this->selectnotes_.push_back(addnote);
-			return;
-		}
 
 		auto itr = this->selectnotes_.begin();
 		auto e_itr = this->selectnotes_.end();

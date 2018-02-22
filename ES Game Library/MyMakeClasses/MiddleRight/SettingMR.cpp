@@ -2,7 +2,6 @@
 #include "../Button/PMCalcButton.h"
 #include "../Button/FreeButton.h"
 #include "MenuMR.h"
-#include "../InputSingleton.h"
 
 SettingMR::SettingMR(bool uniteflag, std::vector<AbstructNote*>& selectnote){
 
@@ -14,6 +13,8 @@ SettingMR::SettingMR(bool uniteflag, std::vector<AbstructNote*>& selectnote){
 		auto itr = this->notes_.end();
 		itr--;
 
+		this->unitenote_ = (*itr);
+		
 		this->height_ = (*itr)->GetHeight();
 		this->timing_ = (*itr)->GetTiming();
 
@@ -22,6 +23,8 @@ SettingMR::SettingMR(bool uniteflag, std::vector<AbstructNote*>& selectnote){
 
 		this->height_ = 0.0f;
 		this->timing_ = 0;
+
+		this->unitenote_ = nullptr;
 
 	}
 
@@ -102,8 +105,6 @@ void SettingMR::MyClassDraw(){
 
 void SettingMR::ClickCheck(Vector2 mouse_pos){
 
-	if (StaticInput.IsMouseButtonPressed(Mouse_Button1)){
-
 		this->PressCheck(mouse_pos);
 
 		if (this->desidebutton_->CollisionPointToMe(mouse_pos, this->POS_)){
@@ -114,8 +115,6 @@ void SettingMR::ClickCheck(Vector2 mouse_pos){
 			return;
 
 		}
-
-	}
 
 }
 
@@ -168,21 +167,27 @@ void SettingMR::PressCheck(Vector2 mouse_pos){
 	for (auto timingbutton : this->timingbuttons_){
 		if (timingbutton->CollisionPointToMe(mouse_pos, this->POS_)){
 		
-			this->timing_ += (int)timingbutton->GetValue();
+			//this->timing_ += (int)timingbutton->GetValue();
+			int value = timingbutton->GetValue();
 
 			if (this->uniteflag_){
 
-				if (this->timing_ < 0) this->timing_ = 0;
-				if (this->timing_ > 999999) this->timing_ = 999999;
+				//if (this->timing_ < 0) this->timing_ = 0;
+				//if (this->timing_ > 999999) this->timing_ = 999999;
 
-				for (auto note : this->notes_){
+				//for (auto note : this->notes_){
 
-					note->SetTiming(this->timing_);
+				//	note->SetTiming(this->timing_);
 
-				}
+				//}
+
+				this->notemana_ptr_->TimingUnite(value,this->notes_,this->unitenote_);
+				this->timing_ = this->unitenote_->GetTiming();
 
 			}
 			else{
+
+				this->timing_ += value;
 
 				if (this->timing_ < -999999) {
 					this->timing_ = -999999;
@@ -193,16 +198,18 @@ void SettingMR::PressCheck(Vector2 mouse_pos){
 					return;
 				}
 
-				int timing;
+				//int timing;
 
-				for (auto note : this->notes_){
+				//for (auto note : this->notes_){
 
-					timing = note->GetTiming();
-					timing += (int)timingbutton->GetValue();
+				//	timing = note->GetTiming();
+				//	timing += (int)timingbutton->GetValue();
 
-					note->SetTiming(timing);
+				//	note->SetTiming(timing);
 
-				}
+				//}
+
+				this->notemana_ptr_->TimingChenge(value, this->notes_);
 
 
 

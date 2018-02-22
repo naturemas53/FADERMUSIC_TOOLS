@@ -1,6 +1,5 @@
 #include "BpmML.h"
 #include <string>
-#include "../InputSingleton.h"
 
 BpmML::BpmML(){
 
@@ -86,8 +85,6 @@ BpmML::~BpmML(){
 
 void BpmML::ClickCheck(Vector2 mouse_pos){
 
-	if (StaticInput.IsMouseButtonPressed(Mouse_Button1)){
-
 		int value;
 
 		for (auto button : this->bpmbuttons_){
@@ -124,20 +121,9 @@ void BpmML::ClickCheck(Vector2 mouse_pos){
 
 			BPM_DATA data = BPM_DATA(this->timing_, this->bpm_);
 
-			if (this->notemana_ptr_->IsDataAdded(data)){
-
-				this->notemana_ptr_->RemeveData(data);
-
-			}
-			else{
-
 				this->notemana_ptr_->AddBpmData(data);
 
-			}
-
 		}
-
-	}
 
 }
 

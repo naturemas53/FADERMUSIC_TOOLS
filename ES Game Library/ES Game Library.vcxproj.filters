@@ -385,6 +385,18 @@
     <ClCompile Include="MyMakeClasses\MiddleLeft\FileML.cpp">
       <Filter>ソース ファイル\MyMakeClasses\MiddleLeft</Filter>
     </ClCompile>
+    <ClCompile Include="MyMakeClasses\MiddleRight\UniteSelectMR.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\MiddleRight</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\MiddleRight\HeightSettingMR.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\MiddleRight</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\MiddleLeft\SnapML.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\MiddleLeft</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMakeClasses\Manager\BPMManager.cpp">
+      <Filter>ソース ファイル\MyMakeClasses\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectX\Audio\DXAudio8.hpp">
@@ -628,9 +640,6 @@
     <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\SettingSortRoot.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
     </ClInclude>
-    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\UniteSettingSortRoot.h">
-      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
-    </ClInclude>
     <ClInclude Include="MyMakeClasses\BPM_DATA_STRUCT.h">
       <Filter>ヘッダー ファイル\MyMakeClasses</Filter>
     </ClInclude>
@@ -648,6 +657,24 @@
     </ClInclude>
     <ClInclude Include="MyMakeClasses\Button\TakeMLButton.h">
       <Filter>ヘッダー ファイル\MyMakeClasses\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleRight\UniteSelectMR.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\TimingUniteSortRoot.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleRight\HeightSettingMR.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleLeft\SnapML.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleLeft</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\Manager\BPMManager.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\LongBreakSortRoot.h">
+      <Filter>ヘッダー ファイル\MyMakeClasses\MiddleRight\SortRoot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

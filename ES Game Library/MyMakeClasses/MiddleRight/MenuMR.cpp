@@ -2,13 +2,15 @@
 #include "../Button/FreeButton.h"
 #include "../InputSingleton.h"
 #include "SelectMR.h"
+#include "UniteSelectMR.h"
 
 MenuMR::MenuMR(){
 
 	this->buttons_["SETTING"] = new FreeButton(Vector3(0.0f,20.0f,0.0f),_T("SETTING"));
 	this->buttons_["UNITE"] = new FreeButton(Vector3(0.0f, 60.0f, 0.0f), _T("UNITE"));
 	this->buttons_["LONGMAKE"] = new FreeButton(Vector3(0.0f, 100.0f, 0.0f), _T("LONGMAKE"));
-	this->buttons_["DELETE"] = new FreeButton(Vector3(0.0f, 140.0f, 0.0f), _T("DELETE"));
+	this->buttons_["LONGBREAK"] = new FreeButton(Vector3(0.0f, 140.0f, 0.0f), _T("LONGBREAK"));
+	this->buttons_["DELETE"] = new FreeButton(Vector3(0.0f, 180.0f, 0.0f), _T("DELETE"));
 
 }
 
@@ -55,12 +57,17 @@ void MenuMR::SetNextMR(const std::string& mapkey_){
 	}
 	else if (mapkey_ == "UNITE"){ 
 
-		this->nextmr_ = new SelectMR(UNITEMODE);
+		this->nextmr_ = new UniteSelectMR();
 
 	}
 	else if (mapkey_ == "LONGMAKE"){
 
 		this->nextmr_ = new SelectMR(LONGMAKEMODE);
+
+	}
+	else if (mapkey_ == "LONGBREAK"){
+
+		this->nextmr_ = new SelectMR(LONGBREAKMODE);
 
 	}
 	else if (mapkey_ == "DELETE"){

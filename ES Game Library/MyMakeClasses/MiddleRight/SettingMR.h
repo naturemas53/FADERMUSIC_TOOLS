@@ -13,7 +13,6 @@ public:
 	~SettingMR();
 
 	virtual void ClickCheck(Vector2 mouse_pos);
-	//void SetNoteP();
 
 private:
 	
@@ -27,6 +26,7 @@ private:
 	std::list<PMCalcButton*> timingbuttons_;
 
 	std::vector<AbstructNote*> notes_;
+	AbstructNote* unitenote_;
 
 	FreeButton* desidebutton_;
 

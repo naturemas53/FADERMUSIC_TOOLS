@@ -2,6 +2,7 @@
 #include "../../ESGLib.h"
 #include "../Note/AbstructNote.h"
 #include "../BPM_DATA_STRUCT.h"
+#include "BPMManager.h"
 #include <vector>
 #include <algorithm>
 #include <memory>
@@ -20,9 +21,12 @@ public:
 	void DrawtoLayer(int layerid, float layerheight,float layerwidth,float layernotehit_x);
 	void DrawtoPlayArea(int areaid, float areaheight, float areawidth,float areanotehit_x);
 
+	void TimingUnite(int value,std::vector<AbstructNote*>& notes,AbstructNote* unitenote);
+	void TimingChenge(int value,std::vector<AbstructNote*>& notes);
+
 	void AddNote(int layerid, int areaid, float height, int timing);
 
-	void DeleteNote(AbstructNote* deletenote){
+	void DeleteNote(std::vector<AbstructNote*>& deletenotes){
 
 		int layerid;
 		int areaid;
@@ -31,8 +35,17 @@ public:
 		std::vector<AbstructNote*>::iterator l_itr;
 		std::vector<AbstructNote*>::iterator le_itr;
 
-		layerid = deletenote->GetLayer();
-		areaid = deletenote->GetPlayArea();
+		auto itr = deletenotes.begin();
+		auto e_itr = deletenotes.end();
+
+		AbstructNote* deletenote;
+
+		while (itr != e_itr){
+
+			deletenote = (*itr);
+
+			layerid = deletenote->GetLayer();
+			areaid = deletenote->GetPlayArea();
 
 			a_itr = this->allplayarea_[areaid]->begin();
 			ae_itr = this->allplayarea_[areaid]->end();
@@ -42,13 +55,18 @@ public:
 			l_itr = this->alllayer_[layerid]->begin();
 			le_itr = this->alllayer_[layerid]->end();
 			l_itr = std::find(l_itr, le_itr, deletenote);
-			if (l_itr != le_itr) this->alllayer_[layerid]->erase(l_itr);	
-			
+			if (l_itr != le_itr) this->alllayer_[layerid]->erase(l_itr);
+
 			delete deletenote;
+		
+			itr++;
+
+		}
 
 	}
 
 	void LongMakeNote(std::vector<AbstructNote*>& selectnotes);
+	void LongBreakNote(std::vector<AbstructNote*>& breaknotes);
 
 	AbstructNote* LayerClickCheck(Vector2 mouse_pos, 
 		int layerid, 
@@ -66,87 +84,44 @@ public:
 		float notehit_xpos,
 		Vector3 correctionpos = Vector3_Zero);
 
-	unsigned GetBpmDataCount(){ return this->bpmdatas_.size(); }
+	int GetBpmDataCount(){ return this->bpmmanager_.GetDataSize(); }
 	void AddBpmData(BPM_DATA adddata){
 
-		unsigned size = this->GetBpmDataCount();
-		if (size == 0) {
-
-			this->bpmdatas_.push_back(adddata);
-			return;
-
-		}
-
-		auto itr = this->bpmdatas_.begin();
-		auto e_itr = this->bpmdatas_.end();
-
-		int inserttiming = adddata.timing;
-		int checktiming;
-
-		while (itr != e_itr){
-
-			checktiming = itr->timing;
-			if (inserttiming < checktiming){
-
-				this->bpmdatas_.insert(itr, adddata);
-
-			}
-
-			itr++;
-
-		}
-
-		//‚±‚±‚Ü‚Å—ˆ‚½‚Æ‚«‚Íˆê”Ô’x‚¢
-		this->bpmdatas_.push_back(adddata);
-
-	}
-
-	void RemeveData(BPM_DATA removedata){
-
-		auto itr = this->bpmdatas_.begin();
-		auto e_itr = this->bpmdatas_.end();
-
-		itr = std::find(itr,e_itr,removedata);
-
-		this->bpmdatas_.erase(itr);
-
-	}
-
-	bool IsDataAdded(BPM_DATA finddata){
-
-		auto itr = this->bpmdatas_.begin();
-		auto e_itr = this->bpmdatas_.end();
-
-		itr = std::find(itr, e_itr, finddata);
-
-		return (itr != e_itr);
+		this->bpmmanager_.AddData(adddata);
 
 	}
 
 	void BpmDataDraw(Vector2 correctionpos = Vector2_Zero){
 
-		Vector2 pos = Vector2_Zero;
-		float height = 0.0f;
+		this->bpmmanager_.DataDraw(correctionpos);
 
-		if (this->bpmdatas_.size() == 0){
+	}
 
-			SpriteBatch.DrawString(this->font_, correctionpos, Color(0, 0, 0),_T("PLEASE SET BPMDATA"));
+	void SnapFlagChenge(){
+
+		if (this->snapflag_){
+
+			this->snapflag_ = false;
 
 		}
+		else{
 
-		for (auto data : this->bpmdatas_){
+			if (this->bpmmanager_.GetDataSize() == 0) return;
 
-			pos = Vector2_Zero;
-			pos.y = height;
-			pos += correctionpos;
-
-			SpriteBatch.DrawString(this->font_,pos,Color(0,0,0),_T("BPM: %d TIMING: %d"),data.bpm,data.timing);
-			
-			height += 20.0f;
+			this->snapflag_ = true;
 
 		}
 
 	}
+
+	void SnapCountChenge(int value){
+
+		this->bpmmanager_.ChangeSnap(value);
+
+	}
+
+	bool GetSnapFlag(){ return this->snapflag_; }
+	int GetSnapCount(){ return this->bpmmanager_.GetSnapCount(); }
 
 	bool MusicScoreExport();
 	bool MusicScoreImport();
@@ -162,8 +137,9 @@ private:
 	NoteArray allplayarea_;
 	NoteArray alllayer_;
 
+	BPMManager bpmmanager_;
+
 	std::shared_ptr<JukeBox> jukebox_ptr_;
-	std::vector<BPM_DATA> bpmdatas_;
 
 	LONG nowmouse_y_;
 	LONG maxbottom_;
@@ -171,5 +147,7 @@ private:
 	RectWH lineuserect_;
 
 	FONT font_;
+
+	bool snapflag_;
 
 };

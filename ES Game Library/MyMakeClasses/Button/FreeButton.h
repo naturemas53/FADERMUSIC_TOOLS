@@ -8,6 +8,8 @@ public:
 		AbstructButton(pos, name, this->IMAGESIZE_){};
 	~FreeButton() = default;
 
+	void NameChange(std::wstring name){ this->name_ = name; }
+
 private:
 
 };

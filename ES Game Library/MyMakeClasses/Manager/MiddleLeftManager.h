@@ -20,12 +20,6 @@ public:
 
 	void ClickCheck(Vector2 mouse_pos);
 
-	void ButtonReset(){
-
-			for (auto button : this->buttons_) button->SetNowPush(false);
-
-	}
-
 	//‚±‚Á‚¿‚Íã•”‚Ìƒ{ƒ^ƒ“‚É‚æ‚Á‚ÄØ‘Ö
 
 private:

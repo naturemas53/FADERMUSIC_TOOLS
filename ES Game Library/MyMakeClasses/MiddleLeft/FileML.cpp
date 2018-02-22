@@ -1,5 +1,4 @@
 #include "FileML.h"
-#include "../InputSingleton.h"
 
 FileML::FileML(){
 
@@ -19,8 +18,6 @@ FileML::~FileML(){
 
 void FileML::ClickCheck(Vector2 mouse_pos){
 
-	if (StaticInput.IsMouseButtonPressed(Mouse_Button1)){
-
 		if (this->openbutton_->CollisionPointToMe(mouse_pos,this->POS_)){
 
 			this->notemana_ptr_->MusicScoreImport();
@@ -32,8 +29,6 @@ void FileML::ClickCheck(Vector2 mouse_pos){
 			this->notemana_ptr_->MusicScoreExport();
 
 		}
-
-	}
 
 }
 

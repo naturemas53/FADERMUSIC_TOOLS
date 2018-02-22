@@ -16,8 +16,8 @@ POINT_CORRECTIONPOS_(Vector3(195.0f,5.0f,0.0f)){
 	this->music_ = nullptr;
 	
 	this->prevtime_ = 0;
+	this->lengthtime_ = 0;
 	this->lengthbyte_ = 0;
-	this->secmilibyte_ = 0;
 	this->nowposbyte_ = 0;
 
 	this->pointpos_ = Vector3_Zero;
@@ -86,8 +86,9 @@ void JukeBox::MyClassDraw(){
 
 		this->button_->Draw();
 
-		DWORD length = this->lengthbyte_ / this->secmilibyte_;
-		DWORD now = this->nowposbyte_ / this->secmilibyte_;
+		DWORD length = this->lengthtime_;
+
+		DWORD now = this->GetNowTimeMiliSec();
 
 		userect = RectWH(120, 110, 30, 30);
 		pos = this->pointpos_ + this->POINT_CORRECTIONPOS_;
@@ -138,7 +139,10 @@ void JukeBox::ChangeMusic(){
 			}
 			this->button_->SetMusic(this->music_);
 			this->lengthbyte_ = this->music_->GetLengthByte();
-			this->secmilibyte_ = this->music_->Get1SecMiliByte();
+			DWORD secbyte = this->music_->Get1SecByte();
+
+			float flength = (float)this->lengthbyte_ / (float)secbyte;
+			this->lengthtime_ = (int)(flength * 1000);
 
 			this->music_->Reset();
 		}
@@ -170,15 +174,8 @@ void JukeBox::ClickCheck(Vector2 mouse_pos){
 	if (this->music_ == nullptr) return;
 
 	if (StaticInput.IsMouseButtonPressed(Mouse_Button1)){
-
-		if (this->button_->CollisionPointToMe(mouse_pos, this->POS_)){
-
-			this->button_->SetNowPush(true);
-
-		}
-
 		Vector3 pointpos = this->POS_ + this->pointpos_ + this->POINT_CORRECTIONPOS_;
-		Vector3 mousepos = Vector3(mouse_pos.x,mouse_pos.y,0.0f);
+		Vector3 mousepos = Vector3(mouse_pos.x, mouse_pos.y, 0.0f);
 
 		if (Collision(pointpos, Vector2(30.0f, 30.0f), mousepos)){
 
@@ -186,17 +183,16 @@ void JukeBox::ClickCheck(Vector2 mouse_pos){
 
 		}
 
-	}
-	else{
-
-		if (this->button_->IsPushed(mouse_pos,this->POS_)){
+		if (this->button_->CollisionPointToMe(mouse_pos, this->POS_)){
 
 			this->button_->MusicStartStop();
 
 		}
 
+	}
+	else if (StaticInput.IsMouseButtonReleased(Mouse_Button1)){
+
 		this->pointhitflag_ = false;
-		this->button_->SetNowPush(false);
 
 	}
 

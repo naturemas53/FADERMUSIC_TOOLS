@@ -3,11 +3,12 @@
 #include "SortRoot\DeleteSortRoot.h"
 #include "SortRoot\MakeLongSortRoot.h"
 #include "SortRoot\SettingSortRoot.h"
-#include "SortRoot\UniteSettingSortRoot.h"
+#include "SortRoot\TimingUniteSortRoot.h"
+#include "SortRoot\LongBreakSortRoot.h"
 #include "../Button/FreeButton.h"
-#include "../InputSingleton.h"
 #include "MenuMR.h"
 #include "SettingMR.h"
+#include "HeightSettingMR.h"
 #include <algorithm>
 
 std::shared_ptr<PlayAreaManager> SelectMR::areamana_ptr_ = nullptr;
@@ -22,9 +23,9 @@ SelectMR::SelectMR(SELECTMODE selectmode){
 
 		break;
 
-	case UNITEMODE:
+	case DOUBLEUNITEMODE:
 
-		this->sortroot_ = new UniteSettingSortRoot();
+		this->sortroot_ = new TimingUniteSortRoot();
 
 		break;
 
@@ -34,6 +35,13 @@ SelectMR::SelectMR(SELECTMODE selectmode){
 
 		break;
 
+	case LONGBREAKMODE:
+
+		this->sortroot_ = new LongBreakSortRoot();
+
+		break;
+
+	case HEIGHTUNITEMODE:
 	case DELETEMODE:
 
 		this->sortroot_ = new DeleteSortRoot();
@@ -69,8 +77,6 @@ SelectMR::~SelectMR(){
 }
 
 void SelectMR::ClickCheck(Vector2 mouse_pos){
-
-	if (!StaticInput.IsMouseButtonPressed(Mouse_Button1)) return;
 
 	for (auto button : this->buttons_){
 
@@ -117,7 +123,13 @@ void SelectMR::CheckButton(std::pair<std::string, AbstructButton*> button){
 
 			break;
 
-		case UNITEMODE:
+		case HEIGHTUNITEMODE:
+
+			this->nextmr_ = new HeightSettingMR(notes);
+
+			break;
+
+		case DOUBLEUNITEMODE:
 
 			this->nextmr_ = new SettingMR(true, notes);
 
@@ -130,14 +142,16 @@ void SelectMR::CheckButton(std::pair<std::string, AbstructButton*> button){
 
 			break;
 
+		case LONGBREAKMODE:
+
+			this->notemana_ptr_->LongBreakNote(notes);
+			this->nextmr_ = new MenuMR();
+
+			break;
+
 		case DELETEMODE:
 
-			for (auto note : notes){
-
-				this->notemana_ptr_->DeleteNote(note);
-
-			}
-
+			this->notemana_ptr_->DeleteNote(notes);
 			this->nextmr_ = new MenuMR();
 			break;
 

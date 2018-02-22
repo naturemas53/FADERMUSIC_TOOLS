@@ -17,7 +17,8 @@ public:
 		}
 		else{
 
-			this->AddNote(note);
+			this->selectnotes_.push_back(note);
+			note->SetSelectFlag(true);
 
 		}
 
@@ -25,7 +26,7 @@ public:
 
 	virtual void Draw(FONT font){
 
-		SpriteBatch.DrawString(font, Vector2_Zero, Color(255, 255, 255), _T("NOWSELECT DELETE MODE"));
+		SpriteBatch.DrawString(font, Vector2_Zero, Color(255, 255, 255), _T("NOWSELECT DELETE or HEIGHTUNITE MODE"));
 
 	}
 

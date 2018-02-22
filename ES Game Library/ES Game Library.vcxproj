@@ -170,6 +170,7 @@
     <ClCompile Include="MyMakeClasses\Button\AbstructButton.cpp" />
     <ClCompile Include="MyMakeClasses\JukeBox.cpp" />
     <ClCompile Include="MyMakeClasses\Layer.cpp" />
+    <ClCompile Include="MyMakeClasses\Manager\BPMManager.cpp" />
     <ClCompile Include="MyMakeClasses\Manager\LayerManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -188,14 +189,17 @@
     <ClCompile Include="MyMakeClasses\MiddleLeft\BpmML.cpp" />
     <ClCompile Include="MyMakeClasses\MiddleLeft\FileML.cpp" />
     <ClCompile Include="MyMakeClasses\MiddleLeft\LayerML.cpp" />
+    <ClCompile Include="MyMakeClasses\MiddleLeft\SnapML.cpp" />
     <ClCompile Include="MyMakeClasses\MiddleLeft\SongSelectML.cpp" />
     <ClCompile Include="MyMakeClasses\MiddleRight\AbstructMiddleRight.cpp" />
+    <ClCompile Include="MyMakeClasses\MiddleRight\HeightSettingMR.cpp" />
     <ClCompile Include="MyMakeClasses\MiddleRight\MenuMR.cpp" />
     <ClCompile Include="MyMakeClasses\MiddleRight\SelectMR.cpp" />
     <ClCompile Include="MyMakeClasses\MiddleRight\SettingMR.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="MyMakeClasses\MiddleRight\UniteSelectMR.cpp" />
     <ClCompile Include="MyMakeClasses\Note\AbsutructNote.cpp" />
     <ClCompile Include="MyMakeClasses\Note\LongNote.cpp" />
     <ClCompile Include="MyMakeClasses\Note\PointNote.cpp" />
@@ -267,6 +271,7 @@
     <ClInclude Include="MyMakeClasses\Button\TakeMLButton.h" />
     <ClInclude Include="MyMakeClasses\JukeBox.h" />
     <ClInclude Include="MyMakeClasses\Layer.h" />
+    <ClInclude Include="MyMakeClasses\Manager\BPMManager.h" />
     <ClInclude Include="MyMakeClasses\Manager\LayerManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -285,8 +290,10 @@
     <ClInclude Include="MyMakeClasses\MiddleLeft\BpmML.h" />
     <ClInclude Include="MyMakeClasses\MiddleLeft\FileML.h" />
     <ClInclude Include="MyMakeClasses\MiddleLeft\LayerML.h" />
+    <ClInclude Include="MyMakeClasses\MiddleLeft\SnapML.h" />
     <ClInclude Include="MyMakeClasses\MiddleLeft\SongSelectML.h" />
     <ClInclude Include="MyMakeClasses\MiddleRight\AbstructMiddleRight.h" />
+    <ClInclude Include="MyMakeClasses\MiddleRight\HeightSettingMR.h" />
     <ClInclude Include="MyMakeClasses\MiddleRight\MenuMR.h" />
     <ClInclude Include="MyMakeClasses\MiddleRight\SelectMR.h" />
     <ClInclude Include="MyMakeClasses\MiddleRight\SettingMR.h">
@@ -295,9 +302,11 @@
     </ClInclude>
     <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\AbstructSortRoot.h" />
     <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\DeleteSortRoot.h" />
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\LongBreakSortRoot.h" />
     <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\MakeLongSortRoot.h" />
     <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\SettingSortRoot.h" />
-    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\UniteSettingSortRoot.h" />
+    <ClInclude Include="MyMakeClasses\MiddleRight\SortRoot\TimingUniteSortRoot.h" />
+    <ClInclude Include="MyMakeClasses\MiddleRight\UniteSelectMR.h" />
     <ClInclude Include="MyMakeClasses\Note\AbstructNote.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>

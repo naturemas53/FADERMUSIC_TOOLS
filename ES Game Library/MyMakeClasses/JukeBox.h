@@ -36,7 +36,9 @@ public:
 
 		}
 
-		return this->nowposbyte_ / this->secmilibyte_;
+		float playrate = (float) this->nowposbyte_ / (float)this->lengthbyte_;
+
+		return (DWORD)((float) this->lengthtime_ * playrate);
 
 	}
 
@@ -48,7 +50,7 @@ public:
 
 		}
 
-		return this->lengthbyte_ / this->secmilibyte_;
+		return this->lengthtime_;
 
 	}
 
@@ -98,8 +100,8 @@ private:
 	//SOUNDŒ^‚ÌIDirectSoundBuffer8‚É‚µ‚Ü‚µ‚½
 	SOUND music_;
 	int prevtime_;
+	int lengthtime_;
 	DWORD lengthbyte_;
-	DWORD secmilibyte_;
 	DWORD nowposbyte_;
 
 	Vector3 pointpos_;

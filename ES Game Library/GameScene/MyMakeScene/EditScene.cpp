@@ -6,6 +6,7 @@
 #include "../../MyMakeClasses/JukeBox.h"
 #include "../../MyMakeClasses/Manager/MiddleRightManager.h"
 #include "../../MyMakeClasses/Manager/MiddleLeftManager.h"
+#include "../../MyMakeClasses/Note/AbstructNote.h"
 
 /// <summary>
 /// Allows the game to perform any initialization it needs to before starting to run.
@@ -18,6 +19,8 @@ bool EditScene::Initialize()
 	// TODO: Add your initialization logic here
 
 	StaticInput;//¶¬‚µ‚Äƒ}ƒEƒX‚Ì‰Šú‰»
+
+	AbstructNote::SetClapSound();
 
 	this->jukebox_ptr_ = std::shared_ptr<JukeBox>(new JukeBox());
 
@@ -66,21 +69,14 @@ int EditScene::Update()
 	mouse_pos.x = (float)point.x;
 	mouse_pos.y = (float)point.y;
 
-	if (StaticInput.IsMouseButtonPressed(Mouse_Button1)){
 
+	if (StaticInput.IsMouseLeftButtonPush()){
 		this->middlerightmanager_->ClickCheck(mouse_pos);
 		this->middleleftmanager_->ClickCheck(mouse_pos);
-		this->jukebox_ptr_->ClickCheck(mouse_pos);
-
 	}
 
-	if (StaticInput.IsMouseButtonReleased(Mouse_Button1)){
+	this->jukebox_ptr_->ClickCheck(mouse_pos);
 
-		this->middleleftmanager_->ButtonReset();
-		this->middlerightmanager_->ClickCheck(mouse_pos);
-		this->jukebox_ptr_->ClickCheck(mouse_pos);
-
-	}
 
 	return 0;
 }

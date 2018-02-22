@@ -24,6 +24,8 @@ NoteManager::NoteManager(std::shared_ptr<JukeBox> jukebox_ptr){
 
 	this->font_ = GraphicsDevice.CreateDefaultFont();
 
+	this->snapflag_ = false;
+
 }
 
 NoteManager::~NoteManager(){
@@ -154,10 +156,116 @@ void NoteManager::DrawtoPlayArea(int areaid, float areaheight, float areawidth, 
 
 }
 
+void NoteManager::TimingUnite(int value, std::vector<AbstructNote*>& notes, AbstructNote* unitenote){
+
+	if (this->snapflag_){
+
+		if (this->bpmmanager_.GetDataSize() == 0){
+
+			this->snapflag_ = false;
+			this->TimingChenge(value, notes);
+			return;
+
+		}
+
+		int count = 1;
+		int i = (value < 0) ? -value : value;
+		for (; i > 1; i /= 10){
+			count++;
+		}
+		count = (value < 0) ? -count : count;
+
+		int snaptime;
+		int plustiming;
+		
+		int timing = unitenote->GetTiming();
+		snaptime = this->bpmmanager_.GetSnapTime(timing);
+		plustiming = snaptime * count;
+		timing += plustiming;
+
+		for (auto note : notes){
+
+			note->SetTiming(timing);
+
+		}
+
+
+	}
+	else{
+
+		int timing = unitenote->GetTiming();
+
+		timing += value;
+
+		for (auto note : notes){
+
+			note->SetTiming(timing);
+
+		}
+
+	}
+
+}
+
+void NoteManager::TimingChenge(int value, std::vector<AbstructNote*>& notes){
+
+	if (this->snapflag_){
+
+		if (this->bpmmanager_.GetDataSize() == 0){
+
+			this->snapflag_ = false;
+			this->TimingChenge(value,notes);
+			return;
+
+		}
+
+		int count = 1;
+		int i = (value < 0) ? -value : value;
+		for (; i > 1;i /= 10){
+			count++;
+		}
+		count = (value < 0) ? -count : count;
+
+		int snaptime;
+		int plustiming;
+
+		for (auto note : notes){
+
+			this->bpmmanager_.TimingSnap(note);
+			snaptime = this->bpmmanager_.GetSnapTime(note->GetTiming());
+			plustiming = snaptime * count;
+			note->SetTiming(note->GetTiming() + plustiming);
+
+		}
+
+
+	}
+	else{
+
+		int timing;
+
+		for (auto note : notes){
+			timing = note->GetTiming();
+			timing += value;
+
+			note->SetTiming(timing);
+
+		}
+
+	}
+
+}
+
 void NoteManager::AddNote(int layerid, int areaid, float height, int timing){
 
 	if (timing < 0) timing = 0;
 	if (timing > this->jukebox_ptr_->GetLengthMiliSec()) timing = this->jukebox_ptr_->GetLengthMiliSec();
+
+	if (this->snapflag_){
+
+		timing = this->bpmmanager_.TimingSnap(timing);
+
+	}
 
 		SingleNote* newnote = new SingleNote();
 		newnote->SetLayer(layerid);
@@ -327,6 +435,47 @@ void NoteManager::LongMakeNote(std::vector<AbstructNote*>& selectnotes){
 
 }
 
+void NoteManager::LongBreakNote(std::vector<AbstructNote*>& breaknotes){
+
+	std::vector<AbstructNote*> singles;
+	std::vector<PointNote*> points;
+
+	LongNote* longnote;
+	SingleNote* singlenote;
+
+	for (auto note : breaknotes){
+	
+		if (note->GetType() != LONGNOTE){
+
+			for (auto note : singles){
+				delete note;
+			}
+
+			return;
+
+		}
+
+		longnote = (LongNote*)note;
+
+		points = longnote->GetPoints();
+
+		for (auto point : points){
+
+			singlenote = new SingleNote();
+			singlenote->ValueCopy(point);
+			singles.push_back(singlenote);
+
+		}
+
+	}
+
+	this->DeleteNote(breaknotes);
+
+	for (auto note : singles){
+		this->AddNote(note);
+	}
+}
+
 void NoteManager::NowHeightDraw(float areaheight){
 
 	areaheight -= 30.0f; //ノートの大きさ
@@ -347,7 +496,7 @@ void NoteManager::NowHeightDraw(float areaheight){
 bool NoteManager::MusicScoreExport(){
 
 	//まずチェック
-	unsigned size = this->bpmdatas_.size();
+	int size = this->bpmmanager_.GetDataSize();
 	if (size == 0) return false; //BPM設定して
 	
 	unsigned areacount = this->allplayarea_.size();
@@ -451,7 +600,9 @@ bool NoteManager::MusicScoreExport(){
 				char str[256] = {};
 				file << "BPM" << std::endl;
 
-				for (auto data : this->bpmdatas_){
+				std::vector<BPM_DATA> bpmdatas = this->bpmmanager_.GetBpmDatas();
+
+				for (auto data : bpmdatas){
 					memset(str,0,sizeof(str));
 					
 					sprintf_s(str, sizeof(str),"%06d %03d", data.timing, data.bpm);
@@ -560,26 +711,6 @@ bool NoteManager::MusicScoreExport(){
 
 bool NoteManager::MusicScoreImport(){
 
-	for (auto notes : this->allplayarea_){
-
-		for (auto note : (*notes)){
-
-			delete note;
-
-		}
-
-		notes->clear();
-
-	}
-
-	for (auto notes : this->alllayer_){
-
-		notes->clear();
-
-	}
-
-	this->bpmdatas_.clear();
-
 	wchar_t wstr[256] = {};
 
 	OPENFILENAME ofn = {};
@@ -602,6 +733,26 @@ bool NoteManager::MusicScoreImport(){
 			std::ifstream file(wstr,std::ios::in);
 
 			if (file){
+
+				for (auto notes : this->allplayarea_){
+
+					for (auto note : (*notes)){
+
+						delete note;
+
+					}
+
+					notes->clear();
+
+				}
+
+				for (auto notes : this->alllayer_){
+
+					notes->clear();
+
+				}
+
+				this->bpmmanager_.DataClear();
 
 				std::string str;
 
